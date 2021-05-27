@@ -1,0 +1,18 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+button{
+    outline: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+@font-face {
+    font-family: "iconfont"; /* Project id 2560101 */
+    src: url('./common/icon/iconfont.woff2?t=1621482132644') format('woff2'),
+         url('./common/icon/iconfont.woff?t=1621482132644') format('woff'),
+         url('./common/icon/iconfont.ttf?t=1621482132644') format('truetype');
+}

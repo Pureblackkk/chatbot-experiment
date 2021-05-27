@@ -1,0 +1,19 @@
+.chat-header{
+    position: relative;
+    height: 40px;
+    width: 500px;
+    padding: 10px 10px;
+    margin-bottom: -20px;
+    text-align: center;
+    background-color: rgb(231, 233, 233);
+    border-radius: 20px;
+    font-size: 25px;
+    font-weight: 600;
+    color: rgb(66, 66, 66);
+}
+
+.chat-header span{
+    position: relative;
+    top: -20%;
+    transform: scaleX(-50%);
+}

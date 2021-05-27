@@ -1,0 +1,40 @@
+.next-btn{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: 300px;
+    transform: translateX(-50%);
+    animation: down 1s ease-in-out, move 1s infinite;
+    cursor: pointer;
+}
+
+.next-btn::before{
+    content: "\e695";
+    font-family: "iconfont" !important;
+    font-size: 100px;
+}
+
+@keyframes down {
+    0% {
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 100;
+    }
+}
+
+@keyframes move {
+    0% {
+        top: 300px
+    }
+
+    50%{
+        top: 330px
+    }
+
+    100% {
+        top: 300px
+    }
+}

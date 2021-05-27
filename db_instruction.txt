@@ -1,0 +1,107 @@
+Table Scenario:
+------------------
+Col --- scenario_id
+Val --- number, a scenario idx
+------------------
+Col --- section_id
+Val --- number, an order of the task for each scenario
+------------------
+Col --- instruction 
+Val --- string, instruction sentece for each section
+------------------
+Col --- keyword
+Val --- string, correspond key word in this scenario
+------------------
+Col --- answer 
+Val --- string, correspond answer for a certain key
+
+
+Table Instruction:
+-------------------
+Col --- scenario_id
+Val --- number, a foregin key indicate scenario idx
+-------------------
+Col --- introduction
+Val --- stirng, a brief introduction about this 
+
+
+Table Task:
+-------------------
+Col --- task_id
+Val --- number, indicate specific scenario sequence
+-------------------
+Col --- task1
+Val --- number, the frist scenario_id
+-------------------
+Col --- task2
+Val --- number, the second scenario_id
+-------------------
+Col --- task3
+Val --- number, the third scenario_id
+
+
+
+
+Table Different_Part_Questionnaire (This part is needed to be determined):
+
+
+Table Questionnaire:
+-------------------
+Col --- id
+Val --- number, indicate specific survey sequence
+
+
+Table Survey:
+-------------------
+Col --- id
+Val --- number, indicate specific survey sequence
+-------------------
+Col --- sequence
+Val --- number, indicate specific survey sequence
+
+
+
+Table UserInfo:
+-------------------
+Col --- user_id
+Val --- like a foregin key, indicate a specific user
+-------------------
+Col --- register_time
+Val --- date, for the time he start this expirement
+-------------------
+...(More user information)
+
+
+Table UserSession:
+-------------------
+Col --- user_id
+Val --- indicate a specific user
+-------------------
+Col --- survey_id
+Val --- correspond to a specific survey order 
+-------------------
+Col --- task_id
+Val --- correspond to a specific task order 
+-------------------
+
+
+Table UserConversation:
+-------------------
+Col --- user_id
+Val --- number, indicate a specific user
+-------------------
+Col --- conversation
+Val --- string, the conversation list from frontEnd
+-------------------
+
+Tabel UserSurveyResult:
+-------------------
+Col --- user_id
+Val --- number, indicate a specific user
+-------------------
+Col --- Answer
+Val --- string, the whole answer seperate by special symbol
+-------------------
+
+
+

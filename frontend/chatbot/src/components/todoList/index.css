@@ -1,0 +1,144 @@
+.chat-todoList {
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px #aaa
+}
+
+.chat-title{
+    margin: 0;
+    line-height: 1;
+    background: teal;
+    text-align: center;
+    color: white;
+    font-size: 35px;
+}
+
+.chat-tasks {
+    display: flex;
+    flex-direction: column;
+    padding: 20px
+}
+
+.chat-tasks h2 {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    line-height: 1;
+    position: relative;
+}
+
+.chat-tasks h2::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -20px;
+    top: 15%;
+    width: 1px;
+    height: 70%;
+    border-left: solid 4px teal;
+}
+
+.chat-tasks h2::after {
+    border-radius: 6px;
+    display: block;
+    float: right;
+    background-color: teal;
+    padding: 4px;
+    color: white;
+    min-width: 1.5em;
+    text-align: center;
+}
+
+.done {
+    order: 1;
+}
+
+.done::after{
+    content: counter(done-items);
+}
+
+.pending {
+    order: 3
+}
+
+.pending::after{
+    content: counter(pending-items);
+}
+
+
+/* For input and label */
+.chat-tasks label {
+    order: 4;
+    display: block;
+    position: relative;
+    padding: 10px 0 10px 40px;
+    cursor: pointer;
+    counter-increment: pending-items;
+}
+
+.chat-tasks label:hover {
+    font-size: 20px;
+    background-color: rgba(215, 211, 211, 0.4)
+}
+
+.chat-tasks label::before {
+    content: '\e60c';
+    font: 28px 'FontAwesome';
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    font-size: 20px;
+    font-family: "iconfont" !important;
+    color: rgb(252, 158, 141);
+}
+
+.chat-tasks input {
+    position: absolute;
+    left: -999px;
+}
+
+.chat-tasks input:focus + label{
+    background: rgba(215, 211, 211, 0.4)
+}
+
+.chat-tasks input:checked + label{
+    order: 2;
+    animation: done .6s;
+    counter-increment: done-items;
+}
+
+.chat-tasks input:checked + label::before{
+    content: "\e613";
+    font-size: 20px;
+    font-family: "iconfont" !important;
+    color: rgb(154, 223, 154);
+}
+
+
+
+@keyframes done {
+    0%{
+        transform: translateY(20px);
+        opacity: 0;
+        background: rgba(#fff,.4);
+    }
+    50%{
+        opacity: 1;
+        background: rgba(#fff,.4);
+    }
+}
+
+@keyframes pending {
+    0%{
+        transform: translateY(-20px);
+        opacity: 0;
+        background: rgba(#fff,.4);
+    }
+    50%{
+        opacity: 1;
+        background: rgba(#fff,.4);
+    }
+}
+
+

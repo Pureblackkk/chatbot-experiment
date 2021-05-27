@@ -1,0 +1,44 @@
+.chat-popup {
+    width: 400px;
+    height: 150px;
+    border-radius: 30px;
+    background-color: teal;
+    line-height: 150px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    box-shadow: 5px 10px 16px #aaa ;
+    animation: income .5s;
+}
+
+.dp-icon {
+    float: right;
+    width: 100px;
+    height: 150px;
+    background-color: rgb(205, 205, 205);
+}
+
+.dp-icon::before {
+    content: ' \e69e ';
+    font-family: 'iconfont' !important;
+    font-size: 60px;
+}
+
+
+
+
+@keyframes income {
+    0%{
+       opacity: 0; 
+       transform: scale(0.3);
+       transform: translateX(100%)
+    }
+
+    100%{
+        transform: scale(1);
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+/* \e69e */
