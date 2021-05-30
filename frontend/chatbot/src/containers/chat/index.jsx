@@ -1,13 +1,10 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
 import Footer from '../../components/footer/index';
 import Header from '../../components/header/index';
 import ChatBox from '../../components/chatBox/index';
 import NextBtn from '../../components/nextButton/index';
 import Popup from '../../components/popup/index'
 import {taskList, colorList} from '../../common/task.js';
-import store from '../../store/index';
-import {taskChange} from '../../store/action';
 import history from '../../common/history'
 import "./index.css";
 
@@ -78,4 +75,11 @@ class Chatpage extends React.Component  {
     }
 }
 
-export default withRouter(Chatpage);
+const mapStateToProps = (state) => {
+    return {
+        office: state.office,
+        user:state.user
+    }
+};
+
+export default Chatpage;

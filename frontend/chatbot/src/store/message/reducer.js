@@ -4,10 +4,12 @@ import {USER_MESSAGE, BOT_MESSAGE, TASK_STATE} from './action'
 const defaultState = {
     messageList: [],
     task: 0,
-    state: 0
+    state: 0,
 }
 
-export default (state=defaultState, action) => {
+
+// Reducer to record user's information
+const messageReducer =  (state=defaultState, action) => {
     if(action.type === USER_MESSAGE) {
         let newState = JSON.parse(JSON.stringify(state));
         newState.messageList.push({
@@ -29,4 +31,6 @@ export default (state=defaultState, action) => {
     }
     return state
 }
+
+export {messageReducer};
 
