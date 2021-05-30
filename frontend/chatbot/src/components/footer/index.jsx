@@ -1,10 +1,10 @@
 import React from 'react';
-import {userPostMes, botPostMes, taskChange} from '../../store/action';
-import store from '../../store/index';
+import Actions from '../../store/actions';
 import {botAPI} from '../..//api/bot';
+import {connect} from 'react-redux';
 import "./index.css";
 
-export default class Footer extends React.Component {
+class Footer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,12 +50,17 @@ export default class Footer extends React.Component {
     postMessage() {
         let sendMessage = this.state.input;
         if(sendMessage.trim() === '') {sendMessage='\u00A0'}
-        store.dispatch(userPostMes(sendMessage));
+        this.props.userPostMes(sendMessage);
         this.setState({input: '', chatHeight: this.fixHeight});
         this.lastScrollHeight = this.fixScrollHeight;
 
-        //TODO: Call API and send callback function
-        botAPI(sendMessage, store.dispatch, botPostMes, taskChange, this.props.taskId);
+        //Call Chat API and send dispatch function
+        const storeObj = {
+            ansList: this.props.ansList[this.props.taskId],
+            keyList: this.props.keyList[this.props.taskId]
+        }
+        botAPI(sendMessage, this.props.botPostMes, this.props.taskChange, 
+            this.props.stateId, storeObj);
     }
      
 
@@ -73,3 +78,22 @@ export default class Footer extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (curState) => {
+    return {
+        stateId: curState.messageReducer.state,
+        ansList: curState.infoReducer.userInfo.ans,
+        keyList: curState.infoReducer.userInfo.key
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        userPostMes: (...args) => dispatch(Actions.userPostMes(...args)),
+        botPostMes: (...args) => dispatch(Actions.botPostMes(...args)),
+        taskChange: (...args) => dispatch(Actions.taskChange(...args))
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);

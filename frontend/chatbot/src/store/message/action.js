@@ -1,6 +1,7 @@
 export const USER_MESSAGE = 'userMessage';
 export const BOT_MESSAGE = 'botMessage';
 export const TASK_STATE = 'taskState';
+export const CLEAN_MESSAGE = 'cleanMessage';
 
 
 export const userPostMes = (messgae) => ({
@@ -16,4 +17,8 @@ export const botPostMes = (message) => ({
 export const taskChange = (stateId) => ({
     type: TASK_STATE,
     state: stateId
+})
+
+export const cleanMessage = () => ({
+    type: CLEAN_MESSAGE
 })

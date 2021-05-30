@@ -1,21 +1,14 @@
 import React from 'react';
-import store from '../../store/index';
+import {connect} from 'react-redux';
 import "./index.css";
 
 
 
-export default class ChatBox extends React.Component {
+class ChatBox extends React.Component {
     constructor(props) {
         super(props);
-        this.state = store.getState();
         this.showList = [];
         this.messagesEndRef = React.createRef()
-        // Bind function 
-        this.unsubscribe = store.subscribe(this.storeChange); // Subscribe listener
-    }
-
-    storeChange = () => {
-        this.setState(store.getState());
     }
 
     scrollBottom = () => {
@@ -32,11 +25,9 @@ export default class ChatBox extends React.Component {
 
 
     render() {
-        const {messageList} = this.state
-        console.log(messageList)
         return (
             <div className="chat-box">
-                {this.state.messageList.map((item, index) => {
+                {this.props.messageList.map((item, index) => {
                     return (
                     <div key={index} className={item.type}>
                         <div className={item.type+'-pic'}>
@@ -52,8 +43,13 @@ export default class ChatBox extends React.Component {
             </div>
         )
     }
-    
-    componentWillUnmount() {
-        this.unsubscribe();
+
+}
+
+const mapStateToProps = (state) => {
+    return {
+        messageList: state.messageReducer.messageList
     }
 }
+
+export default connect(mapStateToProps)(ChatBox);
