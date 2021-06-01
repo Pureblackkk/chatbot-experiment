@@ -4,6 +4,9 @@ export default function Header(props) {
     return (
         <div className='chat-header'>
             <span>{myName}</span>
+            {myName === 'Typing' && (<span className='chat-typing'>
+                . . . . . .
+            </span>)}
         </div>
     )
 }

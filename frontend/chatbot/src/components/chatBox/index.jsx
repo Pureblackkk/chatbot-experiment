@@ -25,25 +25,32 @@ class ChatBox extends React.Component {
 
 
     render() {
+        const {name, avator} = this.props.antroLevel;
+        const username = this.props.username;
+        console.log(this.props.messageList);
         return (
             <div className="chat-box">
                 {this.props.messageList.map((item, index) => {
                     return (
-                    <div key={index} className={item.type}>
-                        <div className={item.type+'-pic'}>
+                    <div style={{clear: 'both'}}>
+                        <div key={index} className={item.type}>
+                            <div className={"chat-" + item.type + "-name"}>
+                                {item.type === 'user' ? username : name}
+                            </div>
+                            <div className={item.type+'-pic-'+avator}>
+                            </div>
+                            <div className={"chat-" + item.type + "-message"}>
+                                {item.message}
+                            </div>
                         </div>
-                        <div className={"chat-" + item.type + "-message"}>
-                            {item.message}
-                        </div>
-
                     </div>
+                                        
                     )
                 })}
                 <div ref={this.messagesEndRef}></div>
             </div>
         )
     }
-
 }
 
 const mapStateToProps = (state) => {

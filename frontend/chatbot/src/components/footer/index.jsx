@@ -1,6 +1,6 @@
 import React from 'react';
 import Actions from '../../store/actions';
-import {botAPI} from '../..//api/bot';
+import BotAPI from '../../api/bot';
 import {connect} from 'react-redux';
 import "./index.css";
 
@@ -53,17 +53,21 @@ class Footer extends React.Component {
         this.props.userPostMes(sendMessage);
         this.setState({input: '', chatHeight: this.fixHeight});
         this.lastScrollHeight = this.fixScrollHeight;
+        this.callBot(sendMessage);
+    }
 
+    callBot(sendMessage) {
         //Call Chat API and send dispatch function
         const storeObj = {
             ansList: this.props.ansList[this.props.taskId],
-            keyList: this.props.keyList[this.props.taskId]
+            keyList: this.props.keyList[this.props.taskId],
+            wait: this.props.wait
         }
-        botAPI(sendMessage, this.props.botPostMes, this.props.taskChange, 
-            this.props.stateId, storeObj);
+        // Create Bot instance 
+        BotAPI.sendMessage(sendMessage, this.props.botPostMes, this.props.taskChange, 
+            this.props.stateId, storeObj, this.props.typingCallBack);
     }
      
-
     render() {
         const {chatHeight} = this.state;
         return (

@@ -26,14 +26,17 @@ const testInfoForamt = {
     ],
     antroLevel: [
         {
+            name: 'bot',
             avator: 0, // 0 For robot, 1 for human
             wait: true
         },
         {
-            avtor: 1,
+            name: 'Bruce',
+            avator: 1,
             wait: false
         },
-        {
+        {   
+            name: 'bot',
             avator: 0,
             wait: true
         }
@@ -74,7 +77,6 @@ class Intropage extends React.Component{
         )
     }
 }
-
 
 const mapStateToProps = (curState) => {
     return {

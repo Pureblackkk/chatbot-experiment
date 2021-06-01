@@ -17,3 +17,22 @@
     top: -20%;
     transform: scaleX(-50%);
 }
+
+.chat-typing::after{
+    content: '';
+    display: inline-block;
+    background-color: rgb(231, 233, 233);
+    width: 100px;
+    height: 5px;
+    animation: shift 1s infinite;
+    margin-right: -100px;
+}
+
+@keyframes shift {
+    0%{
+        transform: translateX(-60%);
+    }
+    100%{
+        transform: translateX(10%);
+    }
+}
