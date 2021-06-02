@@ -6,7 +6,9 @@ const defaultState = {
 // Reducer to store whole task flow information
 const infoReducer = (state=defaultState, action) => {
     if(action.type === USER_INFO){
-        state.userInfo = action.info // Need to pay attention
+        let newState = {};
+        newState.userInfo = action.info;
+        return newState
     }
     return state;
 }

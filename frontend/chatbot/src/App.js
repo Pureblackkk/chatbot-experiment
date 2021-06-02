@@ -3,13 +3,15 @@ import Chatpage from './containers/chat/index';
 import Intropage from './containers/introduction/index';
 import Thankspage from './containers/thanks/index';
 import history from './common/history.js';
-import store from './store/index';
+import {store, persistor} from './store/index';
+import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import "./app.css";
 
 function App() {
   return (
   <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
     <Router history={history}>
         <Route exact path='/' component={Intropage}></Route>
         <Route path="/task/:taskId" 
@@ -17,8 +19,8 @@ function App() {
         />
         <Route exact path='/thanks' component={Thankspage}></Route>
     </Router>
+    </PersistGate>
   </Provider>
-
   );
 }
 
