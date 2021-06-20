@@ -123,10 +123,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Restful Configuration
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-    ]
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+#     ]
+# }
+
+# CORS Configuration 
+CORS_ORIGIN_ALLOW_ALL = True
 
 

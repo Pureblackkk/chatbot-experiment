@@ -1,7 +1,15 @@
+import {TypeRatio} from '../config/config';
+import { botPostMes } from '../store/message/action';
+
 class BotAPI {
-    constructor() {
+    constructor(tryTimes, setTryTimes, state) {
         this.messageList = [];
-        this.typingRatio = 6;
+        this.microList = [];
+        this.typingRatio = TypeRatio;
+        this.tryTimes = tryTimes;
+        this.setTryTimes = setTryTimes;
+        this.state = state;
+        this.userId = 'user1';
     }
 
     addMessage(message) {
@@ -16,59 +24,117 @@ class BotAPI {
         return this.messageList;
     }    
 
-    _detection(message, state, keyList) {
-        if(state === keyList.length) {state -= 1;}
-        for(let item of keyList[state]) {
+    cleanTryTime() {
+        this.tryTimes = 0;
+    }
+
+    setState(stateId) {
+        this.state = stateId;
+    }
+    
+    _botResFromApi(question, resolve, testReply) {
+        fetch(`https://ai-chatbot.p.rapidapi.com/chat/free?message=${question}&uid=${this.userId}`, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": "2efe2fb242msh52df0e2c03bddd4p10ec60jsnba248e186f25",
+                    "x-rapidapi-host": "ai-chatbot.p.rapidapi.com"
+            }
+        })
+        .then(response => {
+            if(response.status === 200) {
+                return response.json();
+            }else{
+                return Promise.reject();
+            }
+        }).then((data) => {
+            testReply.ans = data.chatbot.response;
+            resolve();
+        })
+        .catch(err => {
+            testReply.ans = 'Network trouble, please try again!';
+            resolve();
+        });
+
+    }
+
+    _detection(message, keyList) {
+        if(this.state === keyList.length) {this.state -= 1;}
+        for(let item of keyList[this.state]) {
             if(message.search(item) !== -1) {return true}
         }
         return false;
     }
 
-    _botPost(message, botPostMes, resolve, waitTime=null, setTyping=null) {
-        if(waitTime === null) {
-            botPostMes(message);
+    _botMicroPost(botPostMes, resolve, waitTime, setTyping) {
+        if(this.microList.length === 0 ) {
             resolve();
-        }else{
-            setTyping(true);
-            setTimeout(() => {
-                botPostMes(message);
-                setTyping(false);
-                resolve();
-            }, waitTime)
+            return;
         }
+        new Promise((res, rej) => {
+            if(waitTime === null) {
+                botPostMes(this.microList[0]);
+                this.microList.shift();
+                res();
+            }else{
+                setTyping(true);
+                setTimeout(() => {
+                    botPostMes(this.microList[0]);
+                    this.microList.shift();
+                    setTyping(false);
+                    res();
+                }, waitTime)
+            }
+        }
+        ).then(() => {this._botMicroPost(botPostMes, resolve, waitTime, setTyping);})
+    }
+
+    _botPost(message, botPostMes, resolve, waitTime=null, setTyping=null) {
+        if(Array.isArray(message)) {
+            this.microList = [...this.microList, ...message];
+        }else{
+            this.microList.push(message);
+        }
+        this._botMicroPost(botPostMes, resolve, waitTime, setTyping);
     }
 
     _process() {
         if(this.messageList.length === 0) {return;}
-        const {message, botPostMes, taskChange, state, storeObj, setTyping} = this.messageList[0];
+        const {message, botPostMes, taskChange, storeObj, setTyping} = this.messageList[0];
         const {ansList, keyList, wait} = storeObj;
-        const isFixAns = this._detection(message, state, keyList);
-        let testReply;
-        if(isFixAns) {
-            testReply = ansList[state] ? ansList[state] : ansList[state-1];
-        }else{
-            //TODO: Request for reply
-            testReply = 'Bot: This is a Random Answer';
-        }
-        let waitTime = wait ? testReply.length * 1000 / this.typingRatio : null; // Setting the wait time
+        const isFixAns = this._detection(message, keyList);
+        let testReply = {};
         new Promise((res, rej) => {
-            this._botPost(testReply, botPostMes, res, waitTime, setTyping)
-        }).then(() => {
-                isFixAns && state !== ansList.length && taskChange(state + 1);
-                this.removeMessage();
-                this._process();
+            if(isFixAns) {
+                testReply.ans = ansList[this.state] ? ansList[this.state] : ansList[this.state-1];
+                res();
+            }else{
+                this.setTryTimes(++this.tryTimes);
+                // Request for reply from open source API
+                this._botResFromApi(message, res, testReply);
             }
+        })
+        .then(() => {
+            testReply = testReply.ans;
+            let waitTime = wait ? testReply.length * 1000 / this.typingRatio : null; // Setting the wait time
+            new Promise((res, rej) => {
+                this._botPost(testReply, botPostMes, res, waitTime, setTyping)
+            }).then(() => {
+                    isFixAns && this.state !== ansList.length && taskChange(this.state + 1) && this.setTryTimes(0) && this.cleanTryTime()
+                    this.removeMessage();
+                    this._process();
+                }
+            )
+        }
         )
     }
     
-    sendMessage(message, botPostMes, taskChange, state, storeObj, setTyping) {
+    sendMessage(message, botPostMes, taskChange, storeObj, setTyping) {
         let args = {
             'message': message,
             'botPostMes': botPostMes,
             'taskChange': taskChange,
-            'state': state,
             'storeObj': storeObj,
-            'setTyping': setTyping
+            'setTyping': setTyping,
         }
         if(this.messageList.length === 0) {
             this.messageList.push(args);
@@ -79,4 +145,4 @@ class BotAPI {
     }
 }
 
-export default new BotAPI();
+export default BotAPI;

@@ -2,6 +2,9 @@ import React from 'react';
 import history from '../../common/history';
 import {connect} from 'react-redux';
 import Actions from '../../store/actions';
+import { Checkbox, Button } from 'antd';
+import FetchInfo from '../../api/info';
+import './index.css';
 
 const testInfoForamt = {
     id: 1,
@@ -20,7 +23,7 @@ const testInfoForamt = {
         [['aaa', 'key'], ['bbb', 'a', 'key'], ['ccc', 'key', 'cc', 'ddd']]
     ],
     ans: [
-        ['hhahaha', 'pupup', 'lalalal'],
+        [['hi', 'hhahaha'], 'pupup', ['bye', 'thank you']],
         ['asdasd', 'qgfdhgdf', 'dsagfh'],
         ['asfgvc', 'asfasf', 'ffsdfsdf']
     ],
@@ -54,24 +57,60 @@ class Intropage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            isNext: false
+            isAgree: false,
+            isWarn: false
         }
     }
 
-    test = () => {
-        console.log('Push test info');
-        this.props.addUserInfo(testInfoForamt)
-        console.log(this.props.info);
-        history.push('/task/1')
+    startExp = () => {
+        // Test if checked
+        if(!this.state.isAgree) {
+            this.setState({isWarn: true});
+            return;
+        }
+
+        // Fetch scenario information
+        const successCallback = (data) => {
+            this.props.addUserInfo(JSON.parse(data));
+        }
+
+        const failCallback = () => {
+            // TODO: Alert a fail notation
+            console.log('failed');
+        }
+
+        // FetchInfo({test: 'this is a test'}, successCallback, failCallback);
+
+        this.props.addUserInfo(testInfoForamt);
+        history.push('/task/1');
+    }
+
+    checkOnChange = (e) => {
+       this.setState({isAgree: e.target.checked});
+       if(e.target.checked) {
+           this.setState({isWarn: false});
+       }
     }
 
     render() {
         return(
-            <div>
-                <h1>Here's the Intropage part</h1>
-                <p>I agree to take part in the experiment and I give my consent for the collection of the data</p>
-                <button onClick = {this.test}>
-                    Test
+            <div className="welcome-container">
+                <div className="welcome-icon">
+                </div>
+                <h1 className="welcome-title">Hi, welcome to our experiment!</h1>
+                <div className="welcome-content">
+                    <p>In this experiment, we will study the impact of anthropomorphization on risk perception. 
+                        You will need to provide your personal information and cooperate with us. 
+                        We guarantee that the collected data will only be used for scientific research!
+                        Please read the following notes and choose whether to participate in the experiment. 
+                    </p>
+                </div>
+                <div className="welcome-check" style={{color: this.state.isWarn ? 'red' : 'black'}}>
+                    <Checkbox onChange={this.checkOnChange}>I agree to take part in the experiment and I give my consent for the collection of the data</Checkbox>
+                </div>
+                
+                <button className="welcome-button" onClick = {this.startExp}>
+                    Start
                 </button>
             </div>
         )

@@ -1,0 +1,99 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.welcome-icon{
+    font-family: "iconfont" !important;
+    font-size: 150px;
+    color: tomato;
+    margin-top: -10vh;
+    margin-bottom: 5vh;
+}
+
+.welcome-icon:before {
+    content: "\e642";
+}
+
+.welcome-title {
+    font-size: 40px;
+    font-family: 'Bradley Hand Courier New', Courier, monospace, Arial;
+}
+
+.welcome-content {
+    width: 50%;
+    border-radius: 10px;
+    padding: 0px 10px;
+    font-size: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgba(250, 235, 216, 0.5);
+}
+
+.welcome-check {
+    font-size: 20px;
+    margin-top: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.welcome-check::after {
+    content: '\e695';
+    display: inline-block;
+    font-family: 'iconfont' !important;
+    font-size: 30px;
+    animation: highRight .5s infinite;
+    color:rgb(125, 173, 245);
+}
+
+.welcome-check::before {
+    content: '\e695';
+    color:rgb(125, 173, 245);;
+    display: inline-block;
+    font-size: 30px;
+    font-family: 'iconfont' !important;
+    animation: highLeft .5s infinite;
+}
+
+.welcome-button {
+    background-color: rgb(124, 173, 219);
+    width: 120px;
+    height: 50px;
+    font-size: 20px;
+    border: none;
+    border-radius: 25px;
+    margin-top: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+}
+
+.welcome-button:hover{
+    box-shadow: 5px 5px 5px grey;
+}
+
+@keyframes highLeft{
+    0%{
+        transform: rotate(-90deg) translateY(20%);
+    }
+    50%{
+        transform: rotate(-90deg) translateY(-20%);
+    }
+    100%{
+        transform: rotate(-90deg) translateY(20%);
+    }
+}
+
+@keyframes highRight{
+    0%{
+        transform: rotate(90deg) translateY(20%);
+    }
+    50%{
+        transform: rotate(90deg) translateY(-20%);
+    }
+    100%{
+        transform: rotate(90deg) translateY(20%);
+    }
+}

@@ -3,10 +3,14 @@ import Footer from '../../components/footer/index';
 import Header from '../../components/header/index';
 import ChatBox from '../../components/chatBox/index';
 import NextBtn from '../../components/nextButton/index';
-import Popup from '../../components/popup/index'
+import SkipBtn from '../../components/skipButton/index';
+import Popup from '../../components/popup/index';
+import Intro from '../../components/intro';
 import history from '../../common/history';
 import Actions from '../../store/actions';
+import {SkipMax} from '../../config/config';
 import {connect} from 'react-redux';
+import BotAPI from '../../api/bot';
 import "./index.css";
 
 class Chatpage extends React.Component  {
@@ -14,19 +18,23 @@ class Chatpage extends React.Component  {
         super(props);
         this.state = {
             isNext: false,
-            isTyping: false
+            isTyping: false,
         }
         this.taskId = parseInt(this.props.taskId) - 1;
         this.taskList = this.props.info.instruction[this.taskId];
         this.inroduction = this.props.info.inroduction[this.taskId];
         this.color = this.props.info.color[this.taskId];
+        this.stateId = this.props.stateId;
         this.antroLevel = this.props.info.antroLevel[this.taskId];
         this.useranme = this.props.info.name;
         this.botname = this.antroLevel.name;
+
+        this.BotAPI = new BotAPI(this.props.tryTimes, this.props.setTryTimes, this.stateId); // Initial a Bot API
     }
 
     // Listener function
     recieveCount = (num) => {
+        console.log('state:', num);
         const currentTaskLen = this.taskList.length;
         if(num === currentTaskLen && !this.state.isNext) {
             this.setState({isNext: true});
@@ -48,6 +56,17 @@ class Chatpage extends React.Component  {
         history.push(path);
     }
 
+    skipCallBack = () => {
+        // Change the state manually 
+        this.props.setTryTimes(0);
+        this.BotAPI.cleanTryTime();
+        this.props.taskChange(this.props.stateId + 1);
+    }
+
+    introCallBack = () => {
+        this.setState({isIntro: true})
+    }
+
     nextPath = () => {
         if(this.taskId === this.props.info.instruction.length - 1) {return 'todo'} // Todo
         let id = this.taskId + 2
@@ -55,6 +74,8 @@ class Chatpage extends React.Component  {
     }
 
     componentDidUpdate() {
+        //Send the newest id to Bot object
+        this.BotAPI.setState(this.props.stateId);
         this.recieveCount(this.props.stateId);
     }
 
@@ -66,12 +87,21 @@ class Chatpage extends React.Component  {
                 <div className='chat-container'>
                     <Header name= {isTyping ? 'Typing' : this.botname}/>
                     <ChatBox username={this.useranme} antroLevel={this.antroLevel} />
-                    <Footer taskId={this.taskId} wait={this.antroLevel.wait} typingCallBack = {this.typingCallBack}/>
+                    <Footer taskId={this.taskId} wait={this.antroLevel.wait} 
+                    typingCallBack={this.typingCallBack} BotAPI={this.BotAPI}/>
                 </div>
+
+                <Intro style={{display: (this.props.intro) ? 'block' : 'none'}} 
+                intro={this.inroduction} callback={this.props.setIntro} isIntro={this.props.intro}/>
+
+                <div style={{display: (!this.props.intro) ? 'block' : 'none'}} className='intro-container'>
+                    {this.inroduction}
+                </div>
+
                 <div className='popup-container'>
-                    <Popup instr={this.taskList[stateId]} key={stateId}
-                    color={this.color}></Popup>
+                    <Popup instr={this.taskList[stateId]} key={stateId} color={this.color}></Popup>
                     <NextBtn isShow={this.state.isNext} clickCallback={this.nextCallBack} color={this.color}/> 
+                    <SkipBtn isShow={this.props.tryTimes >= SkipMax} clickCallback={this.skipCallBack} color={this.color}/>
                 </div>
             </div>
         )
@@ -79,11 +109,15 @@ class Chatpage extends React.Component  {
 
     componentWillUnmount() {
         // TODO: Send the message to backend (except the personal information)
-
+        
         // Clean the messgeList
         this.props.cleanMessage();
         // Set stateId to 0 again 
         this.props.taskChange(0);
+        // Reset introduction (note that it depends on the real application)
+        this.props.setIntro();
+        // Set tryTimes to 0
+        this.props.setTryTimes(0);
     }
 }
 
@@ -91,8 +125,10 @@ const mapStateToProps = (curState) => {
     console.log(curState);
     return {
         stateId: curState.messageReducer.state,
+        intro: curState.messageReducer.intro,
+        tryTimes: curState.messageReducer.tryTimes,
         messageList: curState.messageReducer.messageList,
-        info: curState.infoReducer.userInfo
+        info: curState.infoReducer.userInfo,
     }
 };
 
@@ -101,7 +137,9 @@ const mapDispatchToProps = (dispatch) => {
         userPostMes: (...args) => dispatch(Actions.userPostMes(...args)),
         botPostMes: (...args) => dispatch(Actions.botPostMes(...args)),
         taskChange: (...args) => dispatch(Actions.taskChange(...args)),
-        cleanMessage: (...args) => dispatch(Actions.cleanMessage(...args))
+        cleanMessage: (...args) => dispatch(Actions.cleanMessage(...args)),
+        setTryTimes: (...args) => dispatch(Actions.setTryTimes(...args)),
+        setIntro:  (...args) => dispatch(Actions.setIntro(...args))
     }
 };
 

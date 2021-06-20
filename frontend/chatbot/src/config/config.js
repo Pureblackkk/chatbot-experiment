@@ -1,0 +1,16 @@
+// Base url for request user information 
+const base = 'http://127.0.0.1:8000/';
+
+// Full request path for require user information 
+const UrlPath = {
+    info: base + 'api/info/'
+}
+
+// Skip this section if SkipMax times wrong answer
+const SkipMax = 4;
+
+// Type speed for per second how many characters
+const TypeRatio = 6
+
+
+export {UrlPath, SkipMax, TypeRatio};

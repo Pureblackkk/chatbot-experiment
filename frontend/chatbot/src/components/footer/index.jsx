@@ -1,6 +1,5 @@
 import React from 'react';
 import Actions from '../../store/actions';
-import BotAPI from '../../api/bot';
 import {connect} from 'react-redux';
 import "./index.css";
 
@@ -9,7 +8,8 @@ class Footer extends React.Component {
         super(props);
         this.state = {
             input: '',
-            chatHeight: 20
+            chatHeight: 20,
+            tryTimes: this.props.tryTimes
         };
         this.fixHeight = 20; 
         this.fixScrollHeight = null;
@@ -64,8 +64,8 @@ class Footer extends React.Component {
             wait: this.props.wait
         }
         // Create Bot instance 
-        BotAPI.sendMessage(sendMessage, this.props.botPostMes, this.props.taskChange, 
-            this.props.stateId, storeObj, this.props.typingCallBack);
+        this.props.BotAPI.sendMessage(sendMessage, this.props.botPostMes, this.props.taskChange, 
+        storeObj, this.props.typingCallBack);
     }
      
     render() {
@@ -86,6 +86,7 @@ class Footer extends React.Component {
 const mapStateToProps = (curState) => {
     return {
         stateId: curState.messageReducer.state,
+        tryTimes: curState.messageReducer.tryTimes,
         ansList: curState.infoReducer.userInfo.ans,
         keyList: curState.infoReducer.userInfo.key
     }
@@ -95,7 +96,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         userPostMes: (...args) => dispatch(Actions.userPostMes(...args)),
         botPostMes: (...args) => dispatch(Actions.botPostMes(...args)),
-        taskChange: (...args) => dispatch(Actions.taskChange(...args))
+        taskChange: (...args) => dispatch(Actions.taskChange(...args)),
+        setTryTimes: (...args) => dispatch(Actions.setTryTimes(...args))
     }
 };
 

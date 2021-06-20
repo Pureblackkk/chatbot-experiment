@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import "./app.css";
 
+// Register for router at root app
 function App() {
   return (
   <Provider store={store}>
