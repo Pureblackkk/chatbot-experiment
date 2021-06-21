@@ -1,6 +1,7 @@
 import {Router, Route} from "react-router-dom";
 import Chatpage from './containers/chat/index';
 import Intropage from './containers/introduction/index';
+import Demographypage from './containers/demograp/index';
 import Thankspage from './containers/thanks/index';
 import history from './common/history.js';
 import {store, persistor} from './store/index';
@@ -15,6 +16,7 @@ function App() {
     <PersistGate loading={null} persistor={persistor}>
     <Router history={history}>
         <Route exact path='/' component={Intropage}></Route>
+        <Route path='/demography' component={Demographypage}></Route>
         <Route path="/task/:taskId" 
         render={(props) => (<Chatpage taskId={props.match.params.taskId} key={props.match.params.taskId}/>)}
         />

@@ -6,6 +6,7 @@
     padding: 20px 10px;
     margin-top: -10px;
     z-index: 0;
+    box-sizing: content-box;
 }
 
 .chat-input {
@@ -19,6 +20,8 @@
     overflow-y: hidden;
     resize: none;
     font-family: "Times New Roman",Georgia, monospace, Serif;;
+    box-sizing: content-box;
+    line-height: normal;
 }
 
 .chat-button {
@@ -32,6 +35,7 @@
     border: none;
     font-size: 15px;
     font-weight: 500;
+    box-sizing: content-box;
 }
 
 .chat-button:hover {

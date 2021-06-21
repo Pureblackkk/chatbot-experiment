@@ -1,0 +1,31 @@
+.demo-form-wrap {
+    font-size: 30px;
+}
+
+.demo-form {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 100px 40px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(209, 209, 209, 0.8);
+    transform: translate(-50%, -50%);
+    background-color: rgba(209, 209, 209, 0.3);
+}
+
+.demo-form-title {
+    font-size: 30px;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(71, 71, 71);
+}
+
+.demo-form-title::before {
+    content: "\e670";
+    font-family: "iconfont" !important;
+    font-size: 50px;
+    color:rgb(98, 108, 98)
+}

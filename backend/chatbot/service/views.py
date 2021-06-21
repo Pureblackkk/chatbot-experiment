@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponse, response
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
+from .models import User
 import json
 
 tempInfo = {
@@ -48,6 +49,38 @@ tempInfo = {
             'green'      
     ]
 }
+
+
+class UserViewSet(ViewSet):
+    def create(self, request, pk=None):
+        # Register for user
+        newUser = User.objects.create()
+        uid = str(newUser.pk)
+        
+        # TODO: Return the user's id and experiment data 
+        resInfo = tempInfo
+        resInfo['id'] = uid
+        return Response(json.dumps(resInfo))
+    
+    def update(self, request, pk=None):
+        userDemo = json.loads(request.body)
+        uid = pk
+
+        # Update
+        try:
+            User.objects.filter(uid=uid).update(
+                age=userDemo['age'], 
+                gender=userDemo['gender'],
+                work_status=userDemo['work'],
+                income=userDemo['income'],
+                education=userDemo['education']
+            ) 
+            return Response(json.dumps({'res': 'ok', 'detail': 'null'}))
+        except Exception as e:
+            return Response(json.dumps({'res': 'fail', 'detail': str(e)}))
+
+
+
 
 
 class InfoViewSet(ViewSet):

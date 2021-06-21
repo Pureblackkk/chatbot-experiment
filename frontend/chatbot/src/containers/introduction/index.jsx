@@ -71,6 +71,7 @@ class Intropage extends React.Component{
 
         // Fetch scenario information
         const successCallback = (data) => {
+            console.log(data);
             this.props.addUserInfo(JSON.parse(data));
         }
 
@@ -79,17 +80,17 @@ class Intropage extends React.Component{
             console.log('failed');
         }
 
-        // FetchInfo({test: 'this is a test'}, successCallback, failCallback);
+        FetchInfo({test: 'this is a test'}, successCallback, failCallback);
 
-        this.props.addUserInfo(testInfoForamt);
-        history.push('/task/1');
+        // this.props.addUserInfo(testInfoForamt);
+        history.push('/demography');
     }
 
     checkOnChange = (e) => {
-       this.setState({isAgree: e.target.checked});
-       if(e.target.checked) {
-           this.setState({isWarn: false});
-       }
+        this.setState({isAgree: e.target.checked});
+        if(e.target.checked) {
+            this.setState({isWarn: false});
+        }
     }
 
     render() {
@@ -105,10 +106,9 @@ class Intropage extends React.Component{
                         Please read the following notes and choose whether to participate in the experiment. 
                     </p>
                 </div>
-                <div className="welcome-check" style={{color: this.state.isWarn ? 'red' : 'black'}}>
-                    <Checkbox onChange={this.checkOnChange}>I agree to take part in the experiment and I give my consent for the collection of the data</Checkbox>
+                <div className="welcome-check">
+                    <Checkbox onChange={this.checkOnChange} style={{color: this.state.isWarn ? 'red' : 'black', fontSize: '20px'}}>I agree to take part in the experiment and I give my consent for the collection of the data</Checkbox>
                 </div>
-                
                 <button className="welcome-button" onClick = {this.startExp}>
                     Start
                 </button>

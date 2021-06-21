@@ -1,7 +1,7 @@
 import {UrlPath} from '../config/config';
 
 const fetchInfo = function(info, success, fail) {
-    fetch(UrlPath.info, {
+    fetch(UrlPath.user, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -19,7 +19,7 @@ const fetchInfo = function(info, success, fail) {
     .then((data) => {
         success(data);
     })
-    .catch(() => {
+    .catch((e) => {
         fail();
     })
 }
