@@ -30,10 +30,22 @@ class ChatBox extends React.Component {
         console.log(this.props.messageList);
         return (
             <div className="chat-box">
+                <div style={{clear: 'both'}}>
+                        <div key={0} className='bot'>
+                            <div className={"chat-bot-name"}>
+                                {name}
+                            </div>
+                            <div className={'bot-pic-'+avator}>
+                            </div>
+                            <div className={"chat-bot-message"}>
+                                {this.props.ans[this.props.taskId][0]}
+                            </div>
+                        </div>
+                </div>    
                 {this.props.messageList.map((item, index) => {
                     return (
                     <div style={{clear: 'both'}}>
-                        <div key={index} className={item.type}>
+                        <div key={index+1} className={item.type}>
                             <div className={"chat-" + item.type + "-name"}>
                                 {item.type === 'user' ? username : name}
                             </div>
@@ -43,8 +55,7 @@ class ChatBox extends React.Component {
                                 {item.message}
                             </div>
                         </div>
-                    </div>
-                                        
+                    </div>          
                     )
                 })}
                 <div ref={this.messagesEndRef}></div>
@@ -55,6 +66,7 @@ class ChatBox extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        ans: state.infoReducer.userInfo.ans,
         messageList: state.messageReducer.messageList
     }
 }

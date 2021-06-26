@@ -32,12 +32,6 @@ class Chatpage extends React.Component  {
         this.BotAPI = new BotAPI(this.props.tryTimes, this.props.setTryTimes, this.stateId); // Initial a Bot API
     }
 
-    componentDidMount() {
-        // Post first bot ans
-        console.log("I am mount")
-        this.props.botPostMes(this.props.info.ans[this.taskId][0]) 
-    }
-
     // Listener function
     recieveCount = (num) => {
         console.log('state:', num);
@@ -92,7 +86,7 @@ class Chatpage extends React.Component  {
             <div className='page-chat'>
                 <div className='chat-container'>
                     <Header name= {isTyping ? 'Typing' : this.botname}/>
-                    <ChatBox username={this.useranme} antroLevel={this.antroLevel} />
+                    <ChatBox key={this.taskId} username={this.useranme} antroLevel={this.antroLevel} taskId={this.taskId}/>
                     <Footer taskId={this.taskId} wait={this.antroLevel.wait} 
                     typingCallBack={this.typingCallBack} BotAPI={this.BotAPI}/>
                 </div>
@@ -114,6 +108,7 @@ class Chatpage extends React.Component  {
     }
 
     componentWillUnmount() {
+        console.log('Chat page unmount')
         // TODO: Send the message to backend (except the personal information)
         
         // Clean the messgeList
