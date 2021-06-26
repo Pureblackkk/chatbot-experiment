@@ -59,8 +59,8 @@ class Footer extends React.Component {
     callBot(sendMessage) {
         //Call Chat API and send dispatch function
         const storeObj = {
-            ansList: this.props.ansList[this.props.taskId],
-            keyList: this.props.keyList[this.props.taskId],
+            ansList: this.props.ansList[this.props.taskId].slice(1),
+            keyList: this.props.keyList[this.props.taskId].slice(1),
             wait: this.props.wait
         }
         // Create Bot instance 

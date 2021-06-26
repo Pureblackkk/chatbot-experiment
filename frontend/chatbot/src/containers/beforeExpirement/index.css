@@ -1,0 +1,92 @@
+.beforexp-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 2s ease-in-out;
+}
+
+.leave {
+    transition: all 2s ease-in-out;
+    left: 0%;
+}
+
+.beforexp-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.beforexp-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 700px;
+}
+
+.beforexp-title{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+
+.beforexp-intro {
+    background-color: rgb(73, 73, 73);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.beforexp-note {
+    width: 700px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(45, 107, 81);
+    font-size: 20px;
+    color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+.beforexp-button {
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    margin-left: 100%; 
+    color: white;
+    background-color:rgb(75, 137, 163);
+    cursor: pointer;
+}
+
+.beforexp-button::before {
+    content: '\e695';
+    color: white;
+    display: inline-block;
+    font-size: 30px;
+    font-family: 'iconfont' !important;
+    animation: highLeft .5s infinite;
+}
+
+.beforexp-button:hover {
+    box-shadow: 2px 2px 5px grey;
+    background-color:rgb(106, 194, 231);
+}

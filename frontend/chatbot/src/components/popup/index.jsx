@@ -3,9 +3,9 @@ import './index.css';
 
 export default function Popup(props) {
     return (
-        <div className="chat-popup" style={{backgroundColor: props.color}}>
-            <span>{props.instr}</span>
-            <div className="dp-icon" style={{'::before': {color: props.color}}}></div>
+        <div className="chat-popup-wrap" style={{backgroundColor: props.color}}>
+            <span className="chat-popup" style={{backgroundColor: props.color}}>{props.instr}</span>
+            <span className="dp-icon" style={{'::before': {color: props.color}}}></span>
         </div>
     )
 }

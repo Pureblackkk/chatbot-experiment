@@ -1,25 +1,35 @@
-.chat-popup {
-    width: 400px;
-    height: 150px;
+.chat-popup-wrap {
+    display: flex;
     border-radius: 30px;
-    background-color: teal;
-    line-height: 150px;
     font-size: 20px;
     color: white;
-    text-align: center;
     box-shadow: 5px 10px 16px #aaa ;
     animation: income .5s;
+    padding: 10px 0px 10px 30px;
+    vertical-align: center;
+}
+
+.chat-popup {
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    background-color: teal;
+    width: 400px;
 }
 
 .dp-icon {
-    float: right;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     width: 100px;
-    height: 150px;
-    background-color: rgb(205, 205, 205);
+    padding-right: 10px;
 }
 
 .dp-icon::before {
     content: ' \e69e ';
+    position: relative;
     font-family: 'iconfont' !important;
     font-size: 60px;
 }

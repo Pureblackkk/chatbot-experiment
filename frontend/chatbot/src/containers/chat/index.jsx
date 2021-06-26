@@ -21,8 +21,8 @@ class Chatpage extends React.Component  {
             isTyping: false,
         }
         this.taskId = parseInt(this.props.taskId) - 1;
-        this.taskList = this.props.info.instruction[this.taskId];
-        this.inroduction = this.props.info.inroduction[this.taskId];
+        this.taskList = this.props.info.instruction[this.taskId].slice(1);
+        // this.inroduction = this.props.info.inroduction[this.taskId];
         this.color = this.props.info.color[this.taskId];
         this.stateId = this.props.stateId;
         this.antroLevel = this.props.info.antroLevel[this.taskId];
@@ -30,6 +30,12 @@ class Chatpage extends React.Component  {
         this.botname = this.antroLevel.name;
 
         this.BotAPI = new BotAPI(this.props.tryTimes, this.props.setTryTimes, this.stateId); // Initial a Bot API
+    }
+
+    componentDidMount() {
+        // Post first bot ans
+        console.log("I am mount")
+        this.props.botPostMes(this.props.info.ans[this.taskId][0]) 
     }
 
     // Listener function
@@ -91,17 +97,17 @@ class Chatpage extends React.Component  {
                     typingCallBack={this.typingCallBack} BotAPI={this.BotAPI}/>
                 </div>
 
-                <Intro style={{display: (this.props.intro) ? 'block' : 'none'}} 
-                intro={this.inroduction} callback={this.props.setIntro} isIntro={this.props.intro}/>
-
-                <div style={{display: (!this.props.intro) ? 'block' : 'none'}} className='intro-container'>
-                    {this.inroduction}
-                </div>
-
-                <div className='popup-container'>
-                    <Popup instr={this.taskList[stateId]} key={stateId} color={this.color}></Popup>
-                    <NextBtn isShow={this.state.isNext} clickCallback={this.nextCallBack} color={this.color}/> 
-                    <SkipBtn isShow={this.props.tryTimes >= SkipMax} clickCallback={this.skipCallBack} color={this.color}/>
+                {/* <Intro style={{display: (this.props.intro) ? 'block' : 'none'}} 
+                intro={this.inroduction} callback={this.props.setIntro} isIntro={this.props.intro}/> */}
+                <div className='chat-rightpanel'>
+                    {/* <div style={{display: (!this.props.intro) ? 'block' : 'none'}} className='intro-container'>
+                        {this.inroduction}
+                    </div> */}
+                    <div className='popup-container'>
+                        <Popup instr={this.taskList[stateId]} key={stateId} color={this.color}></Popup>
+                        <NextBtn isShow={this.state.isNext} clickCallback={this.nextCallBack} color={this.color}/> 
+                        <SkipBtn isShow={this.props.tryTimes >= SkipMax} clickCallback={this.skipCallBack} color={this.color}/>
+                    </div>
                 </div>
             </div>
         )
