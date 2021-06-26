@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Actions from '../../store/actions';
 import history from '../../common/history';
 import { Form, Select, Button, InputNumber, message} from 'antd';
 import { UrlPath } from '../../config/config';
@@ -51,6 +52,8 @@ class DemographyPage extends React.Component {
     
     onFinsh = (values) => {
         const demoData = values.user;
+        // Change user name based on gender 
+        this.props.changeName(demoData.gender === 'female' ? 'Christine' : 'Paul')
         // Send data to server 
         fetch(UrlPath.user + this.props.uid + '/', {
             method: 'PUT',
@@ -168,9 +171,16 @@ class DemographyPage extends React.Component {
 }
 
 const mapStateToProps = (curState) => {
+    console.log(curState);
     return {
         uid: curState.infoReducer.userInfo.id,
     }
 };
 
-export default connect(mapStateToProps)(DemographyPage);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeName:  (...args) => dispatch(Actions.changeName(...args))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DemographyPage);

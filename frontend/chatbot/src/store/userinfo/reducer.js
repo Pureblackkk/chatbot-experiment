@@ -1,4 +1,5 @@
-import {USER_INFO} from './action';
+import {USER_INFO, CHANGE_NAME} from './action';
+
 const defaultState = {
     userInfo: null
 }
@@ -9,6 +10,10 @@ const infoReducer = (state=defaultState, action) => {
         let newState = {};
         newState.userInfo = action.info;
         return newState
+    }else if(action.type === CHANGE_NAME) {
+        let newState = JSON.parse(JSON.stringify(state));
+        newState.userInfo.name = action.name;
+        return newState;
     }
     return state;
 }

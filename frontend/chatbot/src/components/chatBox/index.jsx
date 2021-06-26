@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import "./index.css";
+import AnsConvert from '../../api/ans';
 
 
 
@@ -23,6 +24,13 @@ class ChatBox extends React.Component {
         this.scrollBottom();
     }
 
+    convertAns(ans) {
+        const evnObj = {
+            name: this.props.name,
+            lastPost: this.props.messageList.slice(-1)[0]
+        }
+        return AnsConvert(ans, evnObj);
+    }
 
     render() {
         const {name, avator} = this.props.antroLevel;
@@ -52,7 +60,7 @@ class ChatBox extends React.Component {
                             <div className={item.type+'-pic-'+avator}>
                             </div>
                             <div className={"chat-" + item.type + "-message"}>
-                                {item.message}
+                                {this.convertAns(item.message)}
                             </div>
                         </div>
                     </div>          
@@ -66,6 +74,7 @@ class ChatBox extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        name: state.infoReducer.userInfo.name,
         ans: state.infoReducer.userInfo.ans,
         messageList: state.messageReducer.messageList
     }

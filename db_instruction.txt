@@ -39,8 +39,19 @@ Val --- number, the second scenario_id
 Col --- task3
 Val --- number, the third scenario_id
 
-
-
+Table Anthropomorphism
+--------------------
+Col --- level_id 
+Val --- number, indicate specific level 
+--------------------
+Col --- avatar 
+Val --- boolean, suggest if there's a avatar
+--------------------
+Col --- typing
+Val --- boolean, suggest if there's a notation for typing
+--------------------
+Col --- tone  
+Val --- boolean, suggest if it is human like or robot like
 
 Table Different_Part_Questionnaire (This part is needed to be determined):
 

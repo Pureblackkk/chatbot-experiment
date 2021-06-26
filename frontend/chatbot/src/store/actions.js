@@ -1,4 +1,4 @@
-import {addUserInfo} from './userinfo/action'
+import {addUserInfo, changeName} from './userinfo/action'
 import {userPostMes, botPostMes, taskChange, cleanMessage, setTryTimes, setIntro} from './message/action'
 
 export default {
@@ -8,5 +8,6 @@ export default {
     taskChange,
     cleanMessage,
     setTryTimes,
-    setIntro
+    setIntro,
+    changeName
 }

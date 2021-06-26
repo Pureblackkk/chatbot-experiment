@@ -12,5 +12,11 @@ const SkipMax = 4;
 // Type speed for per second how many characters
 const TypeRatio = 10;
 
+// Male and Female name 
+const userName = {
+    male: '',
+    fmale: ''
+}
+
 
 export {UrlPath, SkipMax, TypeRatio};

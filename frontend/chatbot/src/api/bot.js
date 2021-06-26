@@ -1,5 +1,6 @@
-import {TypeRatio} from '../config/config';
+import { TypeRatio } from '../config/config';
 import { botPostMes } from '../store/message/action';
+import { } from './ans';
 
 class BotAPI {
     constructor(tryTimes, setTryTimes, state) {
@@ -31,7 +32,7 @@ class BotAPI {
     setState(stateId) {
         this.state = stateId;
     }
-    
+
     _botResFromApi(question, resolve, testReply) {
         fetch(`https://ai-chatbot.p.rapidapi.com/chat/free?message=${question}&uid=${this.userId}`, {
                 "method": "GET",
