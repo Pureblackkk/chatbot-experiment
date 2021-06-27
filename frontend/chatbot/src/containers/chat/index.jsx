@@ -68,9 +68,7 @@ class Chatpage extends React.Component  {
     }
 
     nextPath = () => {
-        if(this.taskId === this.props.info.instruction.length - 1) {return 'todo'} // Todo
-        let id = this.taskId + 2
-        return id.toString();
+        return `/rate/${this.taskId + 1}`
     }
 
     componentDidUpdate() {

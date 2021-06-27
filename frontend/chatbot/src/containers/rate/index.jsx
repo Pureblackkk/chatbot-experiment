@@ -14,12 +14,20 @@ class Ratepage extends React.Component {
     clickHandle = () => {
         if(this.isChange) {
             // TODO: active upload action
-            history.push('/thanks')
+            let path = this.nextPath();
+            history.push(path);
         }else{
             message.warn('Please at least change the rate once!')
         }
      
     }
+
+    nextPath = () => {
+        if(this.taskId === this.props.instruction.length - 1) {return '/thanks'} // Todo
+        let id = this.taskId + 2
+        return '/task/' + id.toString();
+    }
+
     changeHandle = (value) => {
         this.isChange || (this.isChange=true);
         console.log(value);
@@ -61,6 +69,7 @@ class Ratepage extends React.Component {
 const mapStateToProps = (curState) => {
     console.log(curState);
     return {
+        instruction: curState.infoReducer.userInfo.instruction,
         postQ: curState.infoReducer.userInfo.postQuestion,
     }
 };

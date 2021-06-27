@@ -11,7 +11,9 @@ const convertAns = (ansBefore, evnObj) => {
                 const pattern = /(.*?)-(.*?),/g;
                 const matches = tempVal.matchAll(pattern);
                 for(let item of matches) {
-                    if(item[1] === evnObj.lastPost.toLowerCase()){
+                    console.log('match', item[1]);
+                    console.log('last', evnObj.lastPost.message.toLowerCase());
+                    if(item[1] === evnObj.lastPost.message.toLowerCase()){
                         return item[2];
                     }
                 }
