@@ -1,5 +1,5 @@
 // Base url for request user information 
-const base = 'http://127.0.0.1:8000/';
+const base = 'http://119.29.62.27:82/';
 
 // Full request path for require user information 
 const UrlPath = {
@@ -10,13 +10,6 @@ const UrlPath = {
 const SkipMax = 4;
 
 // Type speed for per second how many characters
-const TypeRatio = 50;
-
-// Male and Female name 
-const userName = {
-    male: '',
-    fmale: ''
-}
-
+const TypeRatio = 20;
 
 export {UrlPath, SkipMax, TypeRatio};

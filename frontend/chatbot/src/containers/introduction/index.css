@@ -97,3 +97,25 @@
         transform: rotate(90deg) translateY(20%);
     }
 }
+
+.welcome-clear {
+    position: absolute;
+    left: 10%;
+    border: none;
+    background-color: rgb(255, 255, 144);
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    color: rgb(250, 165, 67);
+    cursor: pointer;
+}
+
+.welcome-clear:hover {
+    background-color: rgb(247, 227, 44);
+    box-shadow: 10px 10px 5px grey;
+}
+
+.welcome-clear:active {
+    background-color: rgb(247, 227, 44);
+    box-shadow: inset 10px 10px 5px grey;
+}

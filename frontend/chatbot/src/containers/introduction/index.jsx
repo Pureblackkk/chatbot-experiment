@@ -24,7 +24,6 @@ class Intropage extends React.Component{
 
         // Fetch scenario information
         const successCallback = (data) => {
-            console.log(data);
             this.props.addUserInfo(JSON.parse(data));
             history.push('/demography');
         }
@@ -41,6 +40,10 @@ class Intropage extends React.Component{
         if(e.target.checked) {
             this.setState({isWarn: false});
         }
+    }
+    
+    cleanRecord = (e) => {
+        localStorage.clear();
     }
 
     render() {
@@ -61,6 +64,9 @@ class Intropage extends React.Component{
                 </div>
                 <button className="welcome-button" onClick = {this.startExp}>
                     Start
+                </button>
+                <button className="welcome-clear" onClick = {this.cleanRecord}>
+                    Clear Record
                 </button>
             </div>
         )
