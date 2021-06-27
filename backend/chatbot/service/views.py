@@ -121,6 +121,7 @@ class UserViewSet(ViewSet):
 
             # Get Ans
             ans = list(Expirement.objects.filter(scenario_id=sceneId, antro_level=antroLevel).values_list('answer', flat=True))
+            print(ans)
             resAns.append(ans)
 
         # Add the query value in return object 
