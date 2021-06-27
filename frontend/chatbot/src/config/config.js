@@ -10,7 +10,7 @@ const UrlPath = {
 const SkipMax = 4;
 
 // Type speed for per second how many characters
-const TypeRatio = 10;
+const TypeRatio = 50;
 
 // Male and Female name 
 const userName = {
