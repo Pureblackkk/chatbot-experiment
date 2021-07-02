@@ -10,10 +10,8 @@
 .welcome-icon{
     font-family: "iconfont" !important;
     font-size: 150px;
-    font-size: 20vh;
+    font-size: 18vmin;
     color: tomato;
-    margin-top: -10vh;
-    margin-bottom: 5vh;
 }
 
 .welcome-icon:before {
@@ -21,15 +19,15 @@
 }
 
 .welcome-title {
-    font-size: 3vw;
+    font-size: 6vmin;
     font-family: 'Bradley Hand Courier New', Courier, monospace, Arial;
 }
 
 .welcome-content {
     width: 50%;
     border-radius: 10px;
-    padding: 0px 10px;
-    font-size: 1.6vw;
+    padding: 0px 2vmin;
+    font-size: 3vmin;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: rgba(250, 235, 216, 0.5);
 }
@@ -44,7 +42,7 @@
     content: '\e695';
     display: inline-block;
     font-family: 'iconfont' !important;
-    font-size: 1.5vw;
+    font-size: 3vmin;
     animation: highRight .5s infinite;
     color:rgb(125, 173, 245);
 }
@@ -53,20 +51,20 @@
     content: '\e695';
     color:rgb(125, 173, 245);;
     display: inline-block;
-    font-size: 1.5vw;
+    font-size: 3vmin;
     font-family: 'iconfont' !important;
     animation: highLeft .5s infinite;
 }
 
 .welcome-button {
     background-color: rgb(124, 173, 219);
-    width: 9vw;
-    height: 7vh;
+    width: 18vmin;
+    height: 7vmin;
     font-size: 1.5vw;
     border: none;
     border-radius: 25px;
-    border-radius: 4vh;
-    margin-top: 30px;
+    border-radius: 4vmin;
+    margin-top: 1vmin;
     text-decoration: none;
     cursor: pointer;
     color: white;

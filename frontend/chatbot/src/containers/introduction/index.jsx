@@ -53,14 +53,17 @@ class Intropage extends React.Component{
                 </div>
                 <h1 className="welcome-title">Hi, welcome to our experiment!</h1>
                 <div className="welcome-content">
-                    <p>In this experiment, we will study the impact of anthropomorphization on risk perception. 
-                        You will need to provide your personal information and cooperate with us. 
-                        We guarantee that the collected data will only be used for scientific research!
-                        Please read the following notes and choose whether to participate in the experiment. 
+                    <p>In this experiment, you will need to interact with a chatbot. 
+                    Before and after the actual task, you will need to answer some questions.
+                    Some of these questions, will ask you to provide some personal information such as age, gender, etc.
+                    We do not ask you to provide your id or real name, so that your data will be anonymous.
+                    Your data will be kept and stored in our database and use for scientific purpose only.
+                    The might also be used for scientific publications.
+                    Before proceeding to the experiment, you need to give your consent. 
                     </p>
                 </div>
                 <div className="welcome-check">
-                    <Checkbox onChange={this.checkOnChange} style={{color: this.state.isWarn ? 'red' : 'black', fontSize: '1.5vw'}}>I agree to take part in the experiment and I give my consent for the collection of the data</Checkbox>
+                    <Checkbox onChange={this.checkOnChange} style={{color: this.state.isWarn ? 'red' : 'black', fontSize: '3vmin'}}>I agree to take part in the experiment and I give my consent for the collection of the data</Checkbox>
                 </div>
                 <button className="welcome-button" onClick = {this.startExp}>
                     Start

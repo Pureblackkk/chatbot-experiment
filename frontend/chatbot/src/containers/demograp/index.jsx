@@ -153,7 +153,7 @@ class DemographyPage extends React.Component {
                         rules={[{required: true}]}
                     >
                         <Select placeholder="select your education level">
-                        <Option value="high_school_and_lower">High School Degree and Lower</Option>
+                        <Option value="high_school_and_lower">High School Degree or Lower</Option>
                         <Option value="bachelor">Bachelor Degree</Option>
                         <Option value="master">Master Degree</Option>
                         <Option value="doctor">Doctor Degree</Option>
