@@ -10,6 +10,7 @@
 .welcome-icon{
     font-family: "iconfont" !important;
     font-size: 150px;
+    font-size: 20vh;
     color: tomato;
     margin-top: -10vh;
     margin-bottom: 5vh;
@@ -20,7 +21,7 @@
 }
 
 .welcome-title {
-    font-size: 40px;
+    font-size: 3vw;
     font-family: 'Bradley Hand Courier New', Courier, monospace, Arial;
 }
 
@@ -28,7 +29,7 @@
     width: 50%;
     border-radius: 10px;
     padding: 0px 10px;
-    font-size: 25px;
+    font-size: 1.6vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: rgba(250, 235, 216, 0.5);
 }
@@ -43,7 +44,7 @@
     content: '\e695';
     display: inline-block;
     font-family: 'iconfont' !important;
-    font-size: 30px;
+    font-size: 1.5vw;
     animation: highRight .5s infinite;
     color:rgb(125, 173, 245);
 }
@@ -52,18 +53,19 @@
     content: '\e695';
     color:rgb(125, 173, 245);;
     display: inline-block;
-    font-size: 30px;
+    font-size: 1.5vw;
     font-family: 'iconfont' !important;
     animation: highLeft .5s infinite;
 }
 
 .welcome-button {
     background-color: rgb(124, 173, 219);
-    width: 120px;
-    height: 50px;
-    font-size: 20px;
+    width: 9vw;
+    height: 7vh;
+    font-size: 1.5vw;
     border: none;
     border-radius: 25px;
+    border-radius: 4vh;
     margin-top: 30px;
     text-decoration: none;
     cursor: pointer;

@@ -60,7 +60,7 @@ class Intropage extends React.Component{
                     </p>
                 </div>
                 <div className="welcome-check">
-                    <Checkbox onChange={this.checkOnChange} style={{color: this.state.isWarn ? 'red' : 'black', fontSize: '20px'}}>I agree to take part in the experiment and I give my consent for the collection of the data</Checkbox>
+                    <Checkbox onChange={this.checkOnChange} style={{color: this.state.isWarn ? 'red' : 'black', fontSize: '1.5vw'}}>I agree to take part in the experiment and I give my consent for the collection of the data</Checkbox>
                 </div>
                 <button className="welcome-button" onClick = {this.startExp}>
                     Start
