@@ -2,6 +2,7 @@
     position: relative;
     height: 40px;
     width: 500px;
+    width: 34.7vw;
     padding: 10px 10px;
     margin-bottom: -20px;
     text-align: center;
@@ -24,6 +25,7 @@
     display: inline-block;
     background-color: rgb(231, 233, 233);
     width: 100px;
+    width: 6vw;
     height: 5px;
     animation: shift 1s infinite;
     margin-right: -100px;

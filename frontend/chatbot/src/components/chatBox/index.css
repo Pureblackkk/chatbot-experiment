@@ -5,7 +5,9 @@
 .chat-box{
     position: relative;
     width: 520px;
+    width: 36.1vw;
     height: 600px;
+    height: 78vh;
     overflow-y: scroll;
     background-color: rgba(245, 241, 241, 1);
     z-index: 1;
