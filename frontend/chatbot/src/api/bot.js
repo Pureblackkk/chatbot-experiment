@@ -61,7 +61,7 @@ class BotAPI {
     _detection(message, keyList) {
         if(this.state === keyList.length) {this.state -= 1;}
         for(let item of keyList[this.state]) {
-            if(message.search(item) !== -1) {return true}
+            if(message.toLowerCase().search(item) !== -1) {return true}
         }
         return false;
     }
