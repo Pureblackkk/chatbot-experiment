@@ -138,12 +138,14 @@ class DemographyPage extends React.Component {
 
                     {/* Personal Income */}
                     <Form.Item 
-                        name={['user', 'income']} label="Personal Income" 
+                        name={['user', 'income']} label="Personal Yearly Income ($)" 
                         rules={[{required: true}, { type: 'number', min: 0, max: 1e8 }]}
                     >
                         <InputNumber />
                     </Form.Item>
-
+                    <div style={{display: 'block', width: '100%', marginTop: '-1%', marginBottom: '4%'}}>
+                        (If you are unemployed or a student you can enter your family yearly income)
+                    </div>
                     {/* Education Level*/}
                     <Form.Item
                         name={['user', 'education']}

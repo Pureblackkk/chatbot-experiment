@@ -14,6 +14,7 @@
 }
 
 .demo-form-title {
+    display: inline-block;
     font-size: 30px;
     position: relative;
     top: 0%;
