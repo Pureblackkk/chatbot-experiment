@@ -93,3 +93,46 @@
     box-shadow: 2px 2px 5px grey;
     background-color:rgb(106, 194, 231);
 }
+
+
+.rate-select-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    width: 100%;
+}
+
+.rate-select-list li {
+    width: 5vmin;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    list-style: none;
+    font-size: 40px;
+    font-size: 6vmin;
+    font-weight: 500;
+    color: rgba(214, 214, 214, 0.9);
+    cursor: pointer;
+}
+
+.rate-select-list li:hover {
+    animation: zoomIn .5s ease-in-out;
+    color: teal;
+}
+
+@keyframes zoomIn {
+    0%{
+        font-size: 6vmin;
+        color: rgba(214, 214, 214, 0.9);
+    }
+    50%{
+        font-size: 7vmin;
+    }
+    100%{
+        font-size: 6vmin;
+        color: teal;
+    }
+}

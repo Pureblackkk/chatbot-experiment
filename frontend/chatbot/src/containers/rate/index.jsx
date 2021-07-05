@@ -7,8 +7,12 @@ import './index.css';
 class Ratepage extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            selectedNumber: null
+        }
         this.taskId = parseInt(this.props.taskId) - 1;
         this.isChange = false;
+        this.rating = [1, 2, 3, 4, 5];
     }
 
     clickHandle = () => {
@@ -33,6 +37,21 @@ class Ratepage extends React.Component {
         console.log(value);
     }
 
+    colorstyleSet = (isEqual) => {
+        if(isEqual) {
+            return {color: 'teal'}
+        }else{
+            return {}
+        }
+    }
+
+    rateClick = (idx) => {
+        this.isChange = true;
+        this.setState({
+            selectedNumber: idx
+        })
+    }
+
     render() {
         return (
             <div className="rate-button-wrap">
@@ -44,7 +63,7 @@ class Ratepage extends React.Component {
                         <div className="rate-sad">
                             <span>Totally Unwilling</span>
                         </div>
-                        <Rate 
+                        {/* <Rate 
                             style={{
                                 fontSize: '60px',
                                 color: 'teal',
@@ -52,7 +71,21 @@ class Ratepage extends React.Component {
                             defaultValue={1} 
                             character={({ index }) => index + 1} 
                             onChange={this.changeHandle}
-                        />
+                        /> */}
+                        <div className="rate-select-wrap">
+                            <ul className="rate-select-list">
+                                {this.rating.map((val, idx) => {
+                                    return(
+                                        <li key={idx} 
+                                            style={this.colorstyleSet(idx === this.state.selectedNumber)}
+                                            onClick={() => {this.rateClick(idx)}}
+                                        >
+                                            {val}
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
                         <div className="rate-smile">
                             <span>Totally Willing</span>
                         </div>

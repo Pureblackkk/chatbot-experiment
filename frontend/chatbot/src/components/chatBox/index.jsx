@@ -27,7 +27,8 @@ class ChatBox extends React.Component {
     convertAns(ans) {
         const evnObj = {
             name: this.props.name,
-            lastPost: this.props.messageList.slice(-2)[0]
+            lastPost: this.props.messageList.slice(-2)[0],
+            yearlyIncome: this.props.messageList.slice(-8)[0]
         }
         return AnsConvert(ans, evnObj);
     }

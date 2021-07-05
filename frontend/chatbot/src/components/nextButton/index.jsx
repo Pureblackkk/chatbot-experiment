@@ -7,9 +7,7 @@ export default function NextButton(props) {
     }
 
     return (
-        <div style={{color: props.color}}>
-               <div style={{display: props.isShow ? 'block' : 'none'}} 
-               className='next-btn' onClick={sendClick}></div>
+        <div style={{color: props.color, display: props.isShow ? 'block' : 'none'}} className='next-btn' onClick={sendClick}>
         </div>
     )
 }
