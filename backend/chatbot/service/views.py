@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponse, response
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
+from rest_framework import status
 from .models import User, Scenario, Expirement, Task, Task_Anthropomorphism, Anthropomorphism
 import json
 
@@ -121,8 +122,14 @@ class UserViewSet(ViewSet):
 
             # Get Ans
             ans = list(Expirement.objects.filter(scenario_id=sceneId, antro_level=antroLevel).values_list('answer', flat=True))
-            print(ans)
-            resAns.append(ans)
+            listAns = []
+            for strAns in ans:
+                splitAns = strAns.split(' | ')
+                if len(splitAns == 1):
+                    listAns.append(splitAns[0])
+                else:
+                    listAns.append(splitAns)
+            resAns.append(listAns)
 
         # Add the query value in return object 
         responseData['inroduction'] = resIntroduction
@@ -137,7 +144,6 @@ class UserViewSet(ViewSet):
     def update(self, request, pk=None):
         userDemo = json.loads(request.body)
         uid = pk
-
         # Update
         try:
             User.objects.filter(uid=uid).update(
