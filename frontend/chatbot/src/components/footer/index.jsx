@@ -61,7 +61,7 @@ class Footer extends React.Component {
         const storeObj = {
             ansList: this.props.ansList[this.props.taskId].slice(1),
             keyList: this.props.keyList[this.props.taskId].slice(1),
-            wait: this.props.wait
+            wait: this.props.wait,
         }
         // Create Bot instance 
         this.props.BotAPI.sendMessage(sendMessage, this.props.botPostMes, this.props.taskChange, 

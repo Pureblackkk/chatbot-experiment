@@ -27,8 +27,8 @@ class ChatBox extends React.Component {
     convertAns(ans) {
         const evnObj = {
             name: this.props.name,
-            lastPost: this.props.messageList.slice(-2)[0],
-            yearlyIncome: this.props.messageList.slice(-8)[0]
+            income: this.props.conIncome,
+            riskLevel: this.props.conRiskLevel
         }
         return AnsConvert(ans, evnObj);
     }
@@ -77,7 +77,9 @@ const mapStateToProps = (state) => {
     return {
         name: state.infoReducer.userInfo.name,
         ans: state.infoReducer.userInfo.ans,
-        messageList: state.messageReducer.messageList
+        messageList: state.messageReducer.messageList,
+        conIncome: state.conversationReducer.income,
+        conRiskLevel: state.conversationReducer.riskLevel
     }
 }
 

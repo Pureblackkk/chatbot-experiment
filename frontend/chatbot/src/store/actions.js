@@ -1,5 +1,6 @@
 import {addUserInfo, changeName} from './userinfo/action'
 import {userPostMes, botPostMes, taskChange, cleanMessage, setTryTimes, setIntro} from './message/action'
+import {setConIncome, setConRiskLevel} from './conversation/action'
 
 export default {
     addUserInfo,
@@ -9,5 +10,7 @@ export default {
     cleanMessage,
     setTryTimes,
     setIntro,
-    changeName
+    changeName,
+    setConIncome,
+    setConRiskLevel
 }

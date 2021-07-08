@@ -3,13 +3,21 @@ import { botPostMes } from '../store/message/action';
 import { } from './ans';
 
 class BotAPI {
-    constructor(tryTimes, setTryTimes, state) {
+    constructor(tryTimes, setTryTimes, conActions, state, task) {
         this.messageList = [];
         this.microList = [];
         this.typingRatio = TypeRatio;
+
+        // Try times
         this.tryTimes = tryTimes;
         this.setTryTimes = setTryTimes;
+        
+        // Conversation actions 
+        this.conActions = conActions;
+
+        // Status variable
         this.state = state;
+        this.task = task;
         this.userId = 'user1';
     }
 
@@ -66,6 +74,21 @@ class BotAPI {
         return false;
     }
 
+    _certainStateCheck(message) {
+        const status = this.task + '-' + this.state;
+        console.log('Status is : ', status);
+        switch(status) {
+            case '2-5':
+                this.conActions.setConIncome(message);
+                return;
+            case '2-9':
+                this.conActions.setConRiskLevel(message);
+                return;
+            default:
+                return;
+        }
+    }
+
     _botMicroPost(botPostMes, resolve, waitTime, setTyping) {
         if(this.microList.length === 0 ) {
             resolve();
@@ -107,6 +130,7 @@ class BotAPI {
         new Promise((res, rej) => {
             if(isFixAns) {
                 testReply.ans = ansList[this.state] ? ansList[this.state] : ansList[this.state-1];
+                this._certainStateCheck(message);  // See if hint certain task and its state
                 res();
             }else{
                 this.setTryTimes(++this.tryTimes);

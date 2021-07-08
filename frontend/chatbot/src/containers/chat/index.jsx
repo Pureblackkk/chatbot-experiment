@@ -29,7 +29,12 @@ class Chatpage extends React.Component  {
         this.useranme = this.props.info.name;
         this.botname = this.antroLevel.name;
 
-        this.BotAPI = new BotAPI(this.props.tryTimes, this.props.setTryTimes, this.stateId); // Initial a Bot API
+        let conActions = {
+            'setConIncome': this.props.setConIncome,
+            'setConRiskLevel': this.props.setConRiskLevel
+        }
+        this.BotAPI = new BotAPI(this.props.tryTimes, this.props.setTryTimes, conActions,
+            this.stateId, this.taskId + 1); // Initial a Bot API
     }
 
     // Listener function
@@ -138,7 +143,9 @@ const mapDispatchToProps = (dispatch) => {
         taskChange: (...args) => dispatch(Actions.taskChange(...args)),
         cleanMessage: (...args) => dispatch(Actions.cleanMessage(...args)),
         setTryTimes: (...args) => dispatch(Actions.setTryTimes(...args)),
-        setIntro:  (...args) => dispatch(Actions.setIntro(...args))
+        setIntro: (...args) => dispatch(Actions.setIntro(...args)),
+        setConIncome: (...args) => dispatch(Actions.setConIncome(...args)),
+        setConRiskLevel: (...args) => dispatch(Actions.setConRiskLevel(...args))
     }
 };
 

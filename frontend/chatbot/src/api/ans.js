@@ -1,3 +1,22 @@
+const sparseObject = (str) => {
+    const tempStr = str + ',';
+    const pattern = /(.*?)-(.*?),/g;
+    const matches = tempStr.matchAll(pattern);
+    return matches;
+}
+
+const calProcess = (calObject, evnObj) => {
+    const {val, operator, ratio} = calObject;
+    switch(operator) {
+        case 'times':
+            return parseFloat(evnObj[val]) * parseFloat(ratio);
+        default:
+            return '[error]'
+    }
+}
+
+
+
 const convertAns = (ansBefore, evnObj) => {
     return ansBefore.replace(/\[(.*?)\]/gi, function(...args) {
         const [key, val] = args[1].split(':');
@@ -7,21 +26,27 @@ const convertAns = (ansBefore, evnObj) => {
             case 'emoji':
                 return val;
             case 'selection':
-                const tempVal = val + ',';
-                const pattern = /(.*?)-(.*?),/g;
-                const matches = tempVal.matchAll(pattern);
-                let yearlyIncome = evnObj.yearlyIncome.message;
-                console.log(yearlyIncome);
+                const matches = sparseObject(val);
+                let yearlyIncome = evnObj.income;
+                console.log('evenObj', evnObj);
+                console.log('yearly income:', yearlyIncome);
+                console.log(yearlyIncome.match(/\d+/));
                 yearlyIncome = parseFloat(yearlyIncome.match(/\d+/)[0]);
                 for(let item of matches) {
-                    console.log('match', item[1]);
-                    console.log('last', evnObj.lastPost.message.toLowerCase());
-                    if(item[1] === evnObj.lastPost.message.toLowerCase()){
+                    if(item[1] === evnObj.riskLevel.toLowerCase()){
                         let res = parseFloat(item[2]) * yearlyIncome * 0.01;
                         return Math.floor(res);
                     }
                 }
                 return '[error: not found]';
+            case 'calculation':
+                console.log('There is calculation');
+                const calArray = sparseObject(val);
+                const calObject = {};
+                for(let item of calArray) {
+                    calObject[item[1]] = item[2];
+                }
+                return calProcess(calObject, evnObj);
             default:
                 return args[0];
         }   
