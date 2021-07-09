@@ -5,6 +5,7 @@ import Chatpage from './containers/chat/index';
 import Intropage from './containers/introduction/index';
 import Demographypage from './containers/demograp/index';
 import Thankspage from './containers/thanks/index';
+import QuestionPage from './containers/questionnaire/index';
 import history from './common/history.js';
 import {store, persistor} from './store/index';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -19,6 +20,7 @@ function App() {
     <Router history={history}>
         <Route exact path='/' component={Intropage}></Route>
         <Route path='/demography' component={Demographypage}></Route>
+        <Route exact path='/questionnaire' component={QuestionPage}></Route>
         <Route path='/introduction/:taskId' 
         render={(props) => (<BeforeExpPage taskId={props.match.params.taskId} key={props.match.params.taskId}/>)}
         />

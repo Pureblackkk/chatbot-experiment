@@ -1,0 +1,15 @@
+.questionnaire-container {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 100vh;
+    background-color: rgba(230, 230, 230, 0.666);
+    box-shadow: 5px 5px 15px rgba(167, 167, 167, 0.8);
+}
+
+.progress-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+}

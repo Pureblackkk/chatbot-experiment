@@ -1,0 +1,65 @@
+.likert-head {
+    font-size: 2.5vmin;
+}
+
+.likert-id {
+    display: inline-block;
+    font-size: 3vmin;
+    color: rgb(111, 111, 111);
+    background-color: white;
+    padding: 0 1.4vmin;
+    margin: 1vmin;
+    border-radius: 1vmin;
+}
+
+.likert-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    height: 6vmin;
+}
+
+.likert-form-ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    font-size: 4vmin;
+    color: rgba(129, 129, 129, 0.7);
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.likert-form-ul li:hover {
+    color: teal;
+    animation: questionZoomIn .5s ease-in-out;
+}
+
+@keyframes questionZoomIn {
+    0%{
+        color: rgba(129, 129, 129, 0.7);
+        opacity: 0.8;
+    }
+    50%{
+        color: rgba(55, 138, 118, 0.8);
+        font-size: 6vmin;
+    }
+    100%{
+        color: teal;
+        opacity: 1;
+    }
+}
+
+.likert-form-mintext,
+.likert-form-maxtext {
+    font-size: 2.5vmin;
+    flex: 1 2 5%;
+}
+
+.likert-form-select {
+    flex: 2 1 auto;
+}
