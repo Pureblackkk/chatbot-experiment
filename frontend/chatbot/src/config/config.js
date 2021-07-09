@@ -10,6 +10,6 @@ const UrlPath = {
 const SkipMax = 4;
 
 // Type speed for per second how many characters
-const TypeRatio = 1000;
+const TypeRatio = 6;
 
 export {UrlPath, SkipMax, TypeRatio};

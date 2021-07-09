@@ -14,7 +14,7 @@ class BeforeExpPage extends React.Component {
     }
 
     clickHandle = () => {
-        history.push('/task/1');
+        history.push(`/task/${this.taskId+1}`);
     }
 
     render() {

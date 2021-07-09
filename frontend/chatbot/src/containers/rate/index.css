@@ -32,6 +32,7 @@
 .rate-rate { 
     display: flex;
     width: 60vw;
+    height: 10vmin;
     justify-content: space-around;
     align-items: center;
     flex-direction: row;

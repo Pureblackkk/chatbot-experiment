@@ -29,7 +29,7 @@ class Ratepage extends React.Component {
     nextPath = () => {
         if(this.taskId === this.props.instruction.length - 1) {return '/thanks'} // Todo
         let id = this.taskId + 2
-        return '/task/' + id.toString();
+        return '/introduction/' + id.toString();
     }
 
     changeHandle = (value) => {

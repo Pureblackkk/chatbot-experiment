@@ -101,12 +101,13 @@ class BotAPI {
                 res();
             }else{
                 setTyping(true);
+                let tempMsg = this.microList[0]
                 setTimeout(() => {
                     botPostMes(this.microList[0]);
                     this.microList.shift();
                     setTyping(false);
                     res();
-                }, waitTime)
+                }, tempMsg.length * 1000 / this.typingRatio)
             }
         }
         ).then(() => {this._botMicroPost(botPostMes, resolve, waitTime, setTyping);})
