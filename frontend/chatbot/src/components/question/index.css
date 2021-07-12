@@ -1,5 +1,26 @@
+.question-clicked-progress {
+    animation: questionClickProgress .5s ease-in-out;
+}
+
+@keyframes questionClickProgress {
+    0%{
+        border: dashed 0px grey;
+    }
+
+    50%{
+        border: dashed 5px grey;
+    }
+
+    100%{
+        border: dashed 0px grey;
+    }
+}
+
+
+
 .likert-head {
     font-size: 2.5vmin;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .likert-id {
@@ -58,6 +79,7 @@
 .likert-form-maxtext {
     font-size: 2.5vmin;
     flex: 1 2 5%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .likert-form-select {

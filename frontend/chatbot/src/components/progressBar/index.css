@@ -1,3 +1,139 @@
+.progress-ul li {
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+}
+
 .progress-li-undone {
     color: grey;
+}
+
+.progress-li-undone::before {
+    content: "";
+    display: inline-block;
+    width: 3vmin;
+    height: 3vmin;
+    background-color: grey;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.progress-li-undone::after {
+    content: "";
+    display: block;
+    position: relative;
+    width: 1px;
+    height: 8vmin;
+    background-color: grey;
+    border-radius: 50%;
+    left: 1.5vmin;
+}
+
+
+
+.progress-li-done {
+    color: rgb(179, 206, 163);
+}
+
+.progress-li-done::before {
+    content: "";
+    display: inline-block;
+    width: 3vmin;
+    height: 3vmin;
+    background-color: rgb(179, 206, 163);
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.progress-li-done::after {
+    content: "";
+    display: block;
+    position: relative;
+    width: 1px;
+    height: 8vmin;
+    background-color: rgb(179, 206, 163);
+    border-radius: 50%;
+    left: 1.5vmin;
+}
+
+.progress-li-focus{
+    color: rgb(144, 224, 253);;
+}
+
+.progress-li-focus::before {
+    content: "";
+    display: inline-block;
+    width: 3vmin;
+    height: 3vmin;
+    background-color: rgb(144, 224, 253);
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.progress-li-focus::after {
+    content: "";
+    display: block;
+    position: relative;
+    width: 1px;
+    height: 8vmin;
+    background-color: rgb(144, 224, 253);
+    border-radius: 50%;
+    left: 1.5vmin;
+}
+
+.progress-li-error {
+    color: tomato;
+}
+
+.progress-li-error::before {
+    content: "";
+    display: inline-block;
+    width: 3vmin;
+    height: 3vmin;
+    background-color: tomato;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.progress-li-error::after {
+    content: "";
+    display: block;
+    position: relative;
+    width: 1px;
+    height: 8vmin;
+    background-color: tomato;
+    border-radius: 50%;
+    left: 1.5vmin;
+}
+
+.progress-li-next-fail {
+    color: grey;
+    line-height: 0;
+}
+
+.progress-li-next-fail::before{
+    content: "";
+    display: inline-block;
+    width: 3vmin;
+    height: 3vmin;
+    background-color: grey;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.progress-li-next-success {
+    color: rgb(179, 206, 163);
+    line-height: 0;
+}
+
+.progress-li-next-success::before{
+    content: "";
+    display: inline-block;
+    width: 3vmin;
+    height: 3vmin;
+    background-color: rgb(179, 206, 163);
+    border-radius: 50%;
+    vertical-align: middle;
 }

@@ -8,8 +8,75 @@
     box-shadow: 5px 5px 15px rgba(167, 167, 167, 0.8);
 }
 
+.questionnaire-title {
+    text-align: center;
+    font-size: 5vmin;
+    margin-bottom: 4vmin;
+}
+
+.questionnaire-page {
+    position: absolute;
+    left: 50%;
+    top: 92%;
+    transform: translateX(-50%);
+}
+
 .progress-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    right: 6vw;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.progress-submit {
+    background-color: rgb(175, 219, 255);
+    color: white;
+    padding: 0 1vmin;
+    border: rgb(56, 136, 222) solid 1px;
+    border-radius: 0.5vmin;
+    margin-top: 4vmin;
+    font-size: 4vmin;
+    box-shadow: 3px 3px 5px rgba(175, 173, 173, 0.842);
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    animation: progressSubmit .7s ease-in-out;
+}
+
+.progress-submit:hover {
+    box-shadow: inset 5px 5px 5px rgba(128, 126, 126, 0.842);
+}
+
+@keyframes progressSubmit {
+    0% {
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+
+.questionnaire-loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.questionnaire-loading-block{
     position: absolute;
     left: 0;
     top: 0;
+    background-color: rgba(227, 227, 227, 0.625);
+    width: 100vw;
+    height: 100vh;
 }
+
+

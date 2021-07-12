@@ -1,32 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 export default function Question(props) {
-    const {type} = props;
+    const {type, isClickedByProgress, selectedIdx, isFixed} = props;
     const [likertSelectedIdx, setLikertSelectedIdx] = useState(-1);
-    if(type === 'likert') {
-        const {id, question, formArray, minText, maxText, callBack} = props;
-        const clickHandle = (qid, value, lidx) => {
-            setLikertSelectedIdx(lidx); // Change color 
-            callBack(qid, value); // Call questionnaire callback 
+
+    const getClassByProgress = () => {
+        if(isClickedByProgress) {return "question-clicked-progress";}
+        return "";
+    }
+
+    useEffect(() => {
+        if(selectedIdx !== null) {
+            setLikertSelectedIdx(selectedIdx);
         }
-        const fontColor = (idx) => {
-            if(idx === likertSelectedIdx) {return 'teal';}
+    }, [])
+
+    if(type === 'likert') {
+        const {id, tid, lidx, question, formArray, minText, maxText, callBack} = props;
+
+        const clickHandle = (qid, value, index) => {
+            if(isFixed) {return;}
+            setLikertSelectedIdx(index); // Change color 
+            callBack(qid, value, lidx, tid, index); // Call questionnaire callback 
+        }
+
+        const fontColor = (index) => {
+            // if(selectedIdx !==null && selectedIdx === index) {return 'teal';}
+            if(index === likertSelectedIdx) {return 'teal';}
             return '';
         }
+
         return(
-            <div>
+            <div className={getClassByProgress()}>
                 <div className="likert-head">
-                    <span className="likert-id">{id}</span>
+                    <span className="likert-id">{tid}</span>
                     <span className="likert-ask">{question}</span>
                 </div>
                 <div className="likert-form">
                     <div className="likert-form-mintext">{minText}</div>
                     <div className="likert-form-select">
-                        <ul className="likert-form-ul">
+                        <ul className="likert-form-ul" style={{cursor: isFixed ? 'not-allowed' : 'pointer'}}>
                             {formArray.map((item, index) => {
                                 return(
                                     <li onClick={() => {clickHandle(id, item, index)}}
                                         style={{color: fontColor(index)}}
+                                        key={index}
                                     >
                                         {item}
                                     </li>

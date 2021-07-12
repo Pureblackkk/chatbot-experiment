@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 export default function ProgressBar(props) {
-    const {statusArray} = props;
+    const {isFinal, statusArray, isNext, progressCallBack, startTid} = props;
     const getClassName = (status) => {
         switch(status) {
             case 0:
@@ -16,13 +16,26 @@ export default function ProgressBar(props) {
                 return "";
         }
     }
+
+    const clickHandle = (lidx) => {
+        progressCallBack(lidx);
+    }
+
+
     return(
-        <ul>
-            {statusArray.map((val, index) => {
+        <ul className="progress-ul">
+            {statusArray && statusArray.map((val, index) => {
                 return(
-                    <li className={getClassName(val)}>status</li>
+                    <li 
+                        key={index} 
+                        className={getClassName(val)}
+                        onClick={() => {clickHandle(index)}}
+                    > 
+                        {` ${index+startTid}`}
+                    </li>
                 )
             })}
+            <div className={isNext ? "progress-li-next-success" : "progress-li-next-fail"}>{isFinal ? ' Done' : ' Next'}</div>
         </ul>
     )
 }
