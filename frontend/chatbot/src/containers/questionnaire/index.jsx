@@ -33,10 +33,17 @@ class QuestionnairePage extends React.Component {
             isSubmit: false
         }
 
+        // Ref variable of questionnaire
         this.postList = new Array(QuestionNumber).fill(null);
         this.allStatusArray = new Array(this.testQuestionList.length).fill(0);
         this.allAnsArray = new Array(this.testQuestionList.length).fill(null);
         this.allIsNext = new Array(1).fill(false);
+
+        // User info 
+        this.userId = props.uid;
+
+        // TODO: Get questionnarie name 
+        this.questionnaireName = 'testName'
     }
 
     getCurrentList(currentPage=this.state.currentPage) {
@@ -50,6 +57,28 @@ class QuestionnairePage extends React.Component {
     }
 
     componentDidMount() {
+        // Retrieve Questionnaire
+        fetch(`${UrlPath.question + this.questionnaireName}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            if(response.status === 200) {
+                return response.json();
+            }else{
+                return Promise.reject();
+            }
+        })
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.log(`Recieve questionnaire error ${error}`);
+        })
+
         // Initial the status array 
         // const initStatusArray = new Array(QuestionNumber).fill(0);
         let {curStatList} = this.getCurrentList();
@@ -176,13 +205,17 @@ class QuestionnairePage extends React.Component {
             this.setState({
                 isSubmit: true
             }, () => {
+                const postData = {
+                    uid: this.userId,
+                    payload: this.postList
+                }
                 fetch(UrlPath.question, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(this.postList)
+                    body: JSON.stringify(postData)
                 })
                 .then((response) => {
                     if(response.status === 200) {
@@ -313,7 +346,7 @@ class QuestionnairePage extends React.Component {
 
 const mapStateToProps = (curState) => {
     return {
-        info: curState.infoReducer.userInfo,
+        uid: curState.infoReducer.userInfo.id,
     }
 };
 

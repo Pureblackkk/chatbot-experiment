@@ -113,7 +113,21 @@ class UserViewSet(ViewSet):
 
 
 class QuestionViewSet(ViewSet):
+    def retrieve(self, request, pk):
+        questionName = pk
+
+        # Get whole questionnaire 
+        
+        return Response(json.dumps({'res': 'yes'}))
+
     def create(self, request, pk=None):
+        questionData = json.loads(request.body)
+        uid = questionData['uid']
+        ansList = questionData['payload']
+
+        # Create answer object
+
+
         return Response(json.dumps({'res': 'yes'}))
 
 
