@@ -8,7 +8,7 @@ import Popup from '../../components/popup/index';
 import Intro from '../../components/intro';
 import history from '../../common/history';
 import Actions from '../../store/actions';
-import {SkipMax} from '../../config/config';
+import {SkipMax, InternetMode, UrlPath} from '../../config/config';
 import {connect} from 'react-redux';
 import BotAPI from '../../api/bot';
 import "./index.css";
@@ -34,7 +34,7 @@ class Chatpage extends React.Component  {
             'setConRiskLevel': this.props.setConRiskLevel
         }
         this.BotAPI = new BotAPI(this.props.tryTimes, this.props.setTryTimes, conActions,
-            this.stateId, this.taskId + 1); // Initial a Bot API
+            this.stateId, this.taskId + 1, InternetMode); // Initial a Bot API
     }
 
     // Listener function
@@ -54,7 +54,36 @@ class Chatpage extends React.Component  {
     }
 
     nextCallBack = () => {
-        // TODO: Send this term conversation to the backend
+        // Send this term conversation to the backend
+        const postData = {
+            uid: this.props.info.id,
+            dialog: this.props.messageList.reduce((pre, cur) => {
+                pre = `${pre}${cur.type}: ${cur.message}| `;
+                return pre;
+            }, ''),
+            scenario: this.taskId + 1, // TODO: Need to pay attention
+        }
+
+        fetch(UrlPath.dialog, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        }).then((response) => {
+            if(response.status === 200) {
+                return response.json();
+            }else{
+                return Promise.reject();
+            }
+        })
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
 
         // Direct to the next path
         let path = this.nextPath();
@@ -111,9 +140,7 @@ class Chatpage extends React.Component  {
     }
 
     componentWillUnmount() {
-        console.log('Chat page unmount')
-        // TODO: Send the message to backend (except the personal information)
-        
+        console.log('Chat page unmount')      
         // Clean the messgeList
         this.props.cleanMessage();
         // Set stateId to 0 again 

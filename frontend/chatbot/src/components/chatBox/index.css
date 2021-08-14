@@ -23,6 +23,11 @@
     box-sizing: content-box;
 }
 
+.chat-bot-message,
+.chat-user-message {
+    font-family: 'Times New Roman', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
 .chat-user-message {
     position: relative;
     float: right;
@@ -32,7 +37,7 @@
     background-color: rgb(178, 247, 178);
     border-radius: 5px;
     padding: 5px;
-    font-size: 16px;
+    font-size: 18px;
     box-sizing: content-box;
 }
 
@@ -67,7 +72,7 @@
     border-radius: 5px;
     color: white;
     padding: 5px;
-    font-size: 16px;
+    font-size: 18px;
     box-sizing: content-box;
 }
 

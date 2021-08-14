@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Rate, message} from 'antd';
 import history from '../../common/history';
+import {UrlPath} from '../../config/config';
 import './index.css';
 
 class Ratepage extends React.Component {
@@ -17,13 +18,41 @@ class Ratepage extends React.Component {
 
     clickHandle = () => {
         if(this.isChange) {
-            // TODO: active upload action
+            // Upload information to backend
+            this.upload();
             let path = this.nextPath();
             history.push(path);
         }else{
             message.warn('Please at least change the rate once!')
         }
      
+    }
+
+    upload = () => {
+        const postData = {
+            scenario: this.taskId + 1, // TODO: Need to pay attention
+            willing: this.state.selectedNumber + 1
+        }
+        fetch(`${UrlPath.dialog}${this.props.uid}/`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        }).then((response) => {
+            if(response.status === 200) {
+                return response.json();
+            }else{
+                return Promise.reject();
+            }
+        })
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
     }
 
     nextPath = () => {
@@ -103,6 +132,7 @@ const mapStateToProps = (curState) => {
     console.log(curState);
     return {
         instruction: curState.infoReducer.userInfo.instruction,
+        uid: curState.infoReducer.userInfo.id,
         postQ: curState.infoReducer.userInfo.postQuestion,
     }
 };

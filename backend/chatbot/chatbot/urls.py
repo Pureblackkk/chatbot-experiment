@@ -21,6 +21,7 @@ from service import views
 router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet, 'user')
 router.register(r'question', views.QuestionViewSet, 'question')
+router.register(r'dialog', views.DialogViewSet, 'dialog')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

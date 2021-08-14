@@ -2,7 +2,8 @@ from django.http import JsonResponse, HttpResponse, response
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework import status
-from .models import User, Scenario, Expirement, Task, Task_Anthropomorphism, Anthropomorphism
+from .models import User, Scenario, Expirement, Task, Task_Anthropomorphism, Anthropomorphism, DialogRelated
+from .models import Questionnaire, Question, Survey, Survey_Answer
 import json
 
 
@@ -111,24 +112,89 @@ class UserViewSet(ViewSet):
         except Exception as e:
             return Response(json.dumps({'res': 'fail', 'detail': str(e)}))
 
-
 class QuestionViewSet(ViewSet):
     def retrieve(self, request, pk):
-        questionName = pk
+        partId = pk
 
-        # Get whole questionnaire 
-        
-        return Response(json.dumps({'res': 'yes'}))
+        # Get questionnaire instance 
+        try:
+            questionnaireInst = Questionnaire.objects.get(part_id=partId)
+            questionnaireRes = {
+                'part_id': questionnaireInst.part_id,
+                'part_name': questionnaireInst.part_name,
+                'part_notation': questionnaireInst.part_notation,
+                'part_title': questionnaireInst.part_title
+            }
+            
+            # Get whole questionnaire according to question part id
+            questionList = Question.objects.filter(part_id=questionnaireInst).values()
+
+            # Prepare response object 
+            resObject = {
+                'questionnaire': questionnaireRes,
+                'questions': questionList
+            }
+            return Response({'res': 'ok', 'data':resObject, 'detail': 'null'})
+        except Exception as e:
+            return Response(json.dumps({'res': 'fail', 'detail': str(e)}))
 
     def create(self, request, pk=None):
         questionData = json.loads(request.body)
         uid = questionData['uid']
         ansList = questionData['payload']
 
-        # Create answer object
+        try:
+            # Create answer object
+            userInst = User.objects.get(uid=uid)
+            for item in ansList:
+                if not item:
+                    continue
+                questionInst = Question.objects.get(qid=item['qid'])
+                # See if answer already exist
+                isExists = len(Survey_Answer.objects.filter(qid=questionInst, uid=userInst).values_list()) > 0
+                isExists or Survey_Answer.objects.create(qid=questionInst, uid=userInst, ans=item['value'], ans_index=item['selectedIdx'])
 
+            return Response(json.dumps({'res': 'yes', 'detail': 'Save success'}))
+        except Exception as e:
+            return Response(json.dumps({'res': 'fail', 'detail': str(e)}))
 
-        return Response(json.dumps({'res': 'yes'}))
+class DialogViewSet(ViewSet):
+    def create(self, request, pk=None):
+        userInfo = json.loads(request.body)
+        # Get info 
+        uid = userInfo['uid']
+        dialog = userInfo['dialog']
+        sceneId = userInfo['scenario']
+
+        # Create dialog 
+        preRes = DialogRelated.objects.filter(uid=uid, scenario_id=sceneId)
+        if not preRes: 
+            try:
+                userObj = User.objects.get(uid=uid)
+                DialogRelated.objects.create(uid=userObj, scenario_id=sceneId, dialog=dialog)
+                return Response(json.dumps({'res': 'ok', 'detail': 'null'}))
+            except Exception as e:
+                print(e)
+                return Response(json.dumps({'res': 'fail', 'detail': str(e)}))
+        else:
+            return Response(json.dumps({'res': 'fail', 'detail': 'dialog already existed'}))
+
+    def update(self, request, pk=None):
+        userInfo = json.loads(request.body)
+        uid = pk
+        sceneId = userInfo['scenario']
+        willing = userInfo['willing']
+        # Update
+        try:
+            dialogObj = DialogRelated.objects.filter(uid=uid, scenario_id=sceneId)
+            isExisted = dialogObj.values_list('willing', flat=True)[0]
+            isExisted or dialogObj.update(willing=willing)
+            return Response(json.dumps({'res': 'ok', 'detail': 'null'}))
+        except Exception as e:
+            print(e)
+            return Response(json.dumps({'res': 'fail', 'detail': str(e)}))
+
+    
 
 
         

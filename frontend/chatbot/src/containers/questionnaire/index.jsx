@@ -12,16 +12,6 @@ class QuestionnairePage extends React.Component {
     constructor(props) {
         super(props);
 
-        // Below are test data 
-        this.testQuestionList = new Array(15).fill({
-                qid: 1,
-                question: "Do you like Green?",
-                formArray: [1,2,3,4,5,6,7],
-                minText: "don't like",
-                maxText: "like",
-                type: "likert"
-        })
-       
         this.state = {
             statusArray: null,
             lastFocusIdx: null,
@@ -34,22 +24,23 @@ class QuestionnairePage extends React.Component {
         }
 
         // Ref variable of questionnaire
+        this.questionList = [];
         this.postList = new Array(QuestionNumber).fill(null);
-        this.allStatusArray = new Array(this.testQuestionList.length).fill(0);
-        this.allAnsArray = new Array(this.testQuestionList.length).fill(null);
+        this.allStatusArray = new Array(this.questionList.length).fill(0);
+        this.allAnsArray = new Array(this.questionList.length).fill(null);
         this.allIsNext = new Array(1).fill(false);
 
         // User info 
         this.userId = props.uid;
 
         // TODO: Get questionnarie name 
-        this.questionnaireName = 'testName'
+        this.questionnaireId = 1
     }
 
     getCurrentList(currentPage=this.state.currentPage) {
         const startNumber = (currentPage - 1) * QuestionNumber;
         const endNumber = startNumber + QuestionNumber;
-        const curQuesList = this.testQuestionList.slice(startNumber, endNumber);
+        const curQuesList = this.questionList.slice(startNumber, endNumber);
         const curStatList = this.allStatusArray.slice(startNumber, endNumber);
         const curAnsList = this.allAnsArray.slice(startNumber, endNumber);
 
@@ -58,7 +49,7 @@ class QuestionnairePage extends React.Component {
 
     componentDidMount() {
         // Retrieve Questionnaire
-        fetch(`${UrlPath.question + this.questionnaireName}`, {
+        fetch(`${UrlPath.question + this.questionnaireId}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -73,21 +64,38 @@ class QuestionnairePage extends React.Component {
             }
         })
         .then((data) => {
-            console.log(data);
+            console.log(data.data);
+            const {questionnaire, questions} = data.data;
+            // Set current Question list variable 
+            this.questionList = questions;
+            this.allStatusArray = new Array(questions.length).fill(0);
+            this.allAnsArray = new Array(questions.length).fill(null); 
+
+            // TODO: Set current questionnaire variable
+
+            // Initial the status array 
+            // const initStatusArray = new Array(QuestionNumber).fill(0);
+            let {curStatList} = this.getCurrentList();
+            curStatList[0] = 2;
+            this.setState({
+                statusArray: curStatList,
+                lastFocusIdx: 0,
+                lastFocusTIdx: 0
+            });
         })
         .catch((error) => {
             console.log(`Recieve questionnaire error ${error}`);
         })
 
-        // Initial the status array 
-        // const initStatusArray = new Array(QuestionNumber).fill(0);
-        let {curStatList} = this.getCurrentList();
-        curStatList[0] = 2;
-        this.setState({
-            statusArray: curStatList,
-            lastFocusIdx: 0,
-            lastFocusTIdx: 0
-        });
+        // // Initial the status array 
+        // // const initStatusArray = new Array(QuestionNumber).fill(0);
+        // let {curStatList} = this.getCurrentList();
+        // curStatList[0] = 2;
+        // this.setState({
+        //     statusArray: curStatList,
+        //     lastFocusIdx: 0,
+        //     lastFocusTIdx: 0
+        // });
     }
 
     statusChange(lidx, tid) {
@@ -225,20 +233,24 @@ class QuestionnairePage extends React.Component {
                     }
                 })
                 .then((data) => {
-                    console.log(`Success ${data}`);
-                    // Post success then close loading and change state
-                    this.postList = new Array(QuestionNumber).fill(null);
-                    setTimeout(() => {
-                        this.setState({
-                            currentPage: currentPage,
-                            statusArray: statusArray,
-                            isNext: this.allIsNext[currentPage],
-                            lastFocusIdx: lastFocusIdx,
-                            lastFocusTIdx: lastFocusTIdx,
-                            isSubmit: false,
-                            maxPage: maxPage
-                        });
-                    }, 500)
+                    data = JSON.parse(data)
+                    if(data.res === 'yes') {
+                        // Post success then close loading and change state
+                        this.postList = new Array(QuestionNumber).fill(null);
+                        setTimeout(() => {
+                            this.setState({
+                                currentPage: currentPage,
+                                statusArray: statusArray,
+                                isNext: this.allIsNext[currentPage],
+                                lastFocusIdx: lastFocusIdx,
+                                lastFocusTIdx: lastFocusTIdx,
+                                isSubmit: false,
+                                maxPage: maxPage
+                            });
+                        }, 500)
+                    }else{
+                        return Promise.reject(data.detail)
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
@@ -264,15 +276,59 @@ class QuestionnairePage extends React.Component {
     }
 
     nextPartHandle() {
-        // TODO: Push History to next part
+        // Check if qualified 
+        let { isNext } = this.state;
+        
+        // If not raise error
+        if (!isNext) {
+            message.error('Please fill all the questions!')
+            return;
+        }
+
+        // Submit Data 
+        const postData = {
+            uid: this.userId,
+            payload: this.postList
+        }
+        
+        fetch(UrlPath.question, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        })
+        .then((response) => {
+            if(response.status === 200) {
+                return response.json();
+            } else {
+                return Promise.reject();
+            }
+        })
+        .then((data) => {
+            data = JSON.parse(data)
+            if(data.res === 'yes') {
+                // Push History to next part
+                history.push('/introduction/1');
+            } else {
+                return Promise.reject(data.detail)
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            // Alert Error 
+            message.error('Submit fail. Please try again!')
+            this.setState({
+                isSubmit: false
+            });
+        })
     }
-
-
 
     render() {
         const {curQuesList, curAnsList} = this.getCurrentList();
         const startNumber = (this.state.currentPage - 1) * QuestionNumber;
-        const isFinal = (startNumber + curQuesList.length) === this.testQuestionList.length;
+        const isFinal = (startNumber + curQuesList.length) === this.questionList.length;
         const loadingIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
         return(
             <div>
@@ -287,10 +343,10 @@ class QuestionnairePage extends React.Component {
                                     tid={startNumber + index + 1}
                                     lidx={index}
                                     type={item.type}
-                                    question={item.question}
-                                    formArray={item.formArray}
-                                    minText={item.minText}
-                                    maxText={item.maxText}
+                                    question={item.content}
+                                    formArray={item.form_array.split(',')}
+                                    minText={item.min_text}
+                                    maxText={item.max_text}
                                     callBack={this.testCallBack.bind(this)}
                                     key={startNumber + index + 1}
                                     isClickedByProgress={index === this.state.clickByProgress}
@@ -305,7 +361,7 @@ class QuestionnairePage extends React.Component {
                             defaultCurrent={1} 
                             current={this.state.currentPage}
                             pageSize={QuestionNumber}
-                            total={this.testQuestionList.length} 
+                            total={this.questionList.length} 
                             onChange={this.pageChangeHandle.bind(this)}
                         />
                     </div>

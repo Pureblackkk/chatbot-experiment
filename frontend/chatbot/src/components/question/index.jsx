@@ -17,7 +17,6 @@ export default function Question(props) {
 
     if(type === 'likert') {
         const {id, tid, lidx, question, formArray, minText, maxText, callBack} = props;
-
         const clickHandle = (qid, value, index) => {
             if(isFixed) {return;}
             setLikertSelectedIdx(index); // Change color 

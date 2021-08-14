@@ -1,6 +1,7 @@
 import React from 'react';
 import Actions from '../../store/actions';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { DelayPostTime } from '../../config/config';
 import "./index.css";
 
 class Footer extends React.Component {
@@ -15,6 +16,13 @@ class Footer extends React.Component {
         this.fixScrollHeight = null;
         this.lastScrollHeight = null;
         this.postMessage = this.postMessage.bind(this);
+
+        // For debounce purpose 
+        this.delayPostTimer = null;
+        this.tempMsgSaveList = [];
+        
+        // Using debounce to see if user is typing
+        this.isTyping = false;
     }
 
     handleInput = (event) => {
@@ -36,8 +44,12 @@ class Footer extends React.Component {
         this.setState({
             input: event.target.value,
         })
+
         // Update
         this.lastScrollHeight = currentHeight;
+
+        // Set Debounce 
+        this.delayPostTimer && clearTimeout(this.delayPostTimer);
     }
 
     enterMessage = (event) => {
@@ -53,11 +65,19 @@ class Footer extends React.Component {
         this.props.userPostMes(sendMessage);
         this.setState({input: '', chatHeight: this.fixHeight});
         this.lastScrollHeight = this.fixScrollHeight;
-        this.callBot(sendMessage);
+        this.tempMsgSaveList.push(sendMessage);
+
+        // Set a timer 
+        this.delayPostTimer = setTimeout(() => {
+            if(this.tempMsgSaveList.length) {
+                this.callBot(this.tempMsgSaveList.join('.')) // Call bot and send message in temp save list 
+                this.tempMsgSaveList = [];
+            }
+        }, DelayPostTime)
     }
 
     callBot(sendMessage) {
-        //Call Chat API and send dispatch function
+        // Call Chat API and send dispatch function
         const storeObj = {
             ansList: this.props.ansList[this.props.taskId].slice(1),
             keyList: this.props.keyList[this.props.taskId].slice(1),

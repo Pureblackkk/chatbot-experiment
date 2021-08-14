@@ -1,9 +1,8 @@
-import { TypeRatio } from '../config/config';
+import { TypeRatio, FailReply } from '../config/config';
 import { botPostMes } from '../store/message/action';
-import { } from './ans';
 
 class BotAPI {
-    constructor(tryTimes, setTryTimes, conActions, state, task) {
+    constructor(tryTimes, setTryTimes, conActions, state, task, internetMode=false) {
         this.messageList = [];
         this.microList = [];
         this.typingRatio = TypeRatio;
@@ -19,6 +18,9 @@ class BotAPI {
         this.state = state;
         this.task = task;
         this.userId = 'user1';
+
+        // Is internet mode on
+        this.internetMode = internetMode;
     }
 
     addMessage(message) {
@@ -39,6 +41,16 @@ class BotAPI {
 
     setState(stateId) {
         this.state = stateId;
+    }
+
+    // TODO: Make it in configurations
+    _calculateTypingTime(words) {
+        const wordsLen = words.split(' ').length;
+        if(wordsLen < 10) {
+            return 0.02 * wordsLen**2 * 1000;
+        }else{
+            return 0.2 * wordsLen * 1000;
+        }
     }
 
     _botResFromApi(question, resolve, testReply) {
@@ -107,7 +119,7 @@ class BotAPI {
                     this.microList.shift();
                     setTyping(false);
                     res();
-                }, tempMsg.length * 1000 / this.typingRatio)
+                }, this._calculateTypingTime(tempMsg))
             }
         }
         ).then(() => {this._botMicroPost(botPostMes, resolve, waitTime, setTyping);})
@@ -135,15 +147,20 @@ class BotAPI {
                 res();
             }else{
                 this.setTryTimes(++this.tryTimes);
-                // Request for reply from open source API
-                this._botResFromApi(message, res, testReply);
+                if(this.internetMode) {
+                    // Request for reply from open source API
+                    this._botResFromApi(message, res, testReply);
+                }else{
+                    testReply.ans = FailReply;
+                    res();
+                }
             }
         })
         .then(() => {
             testReply = testReply.ans;
             let waitTime = wait ? testReply.length * 1000 / this.typingRatio : null; // Setting the wait time
             new Promise((res, rej) => {
-                this._botPost(testReply, botPostMes, res, waitTime, setTyping)
+                this._botPost(testReply, botPostMes, res, waitTime, setTyping);
             }).then(() => {
                     isFixAns && this.state !== ansList.length && taskChange(this.state + 1) && this.setTryTimes(0) && this.cleanTryTime()
                     this.removeMessage();

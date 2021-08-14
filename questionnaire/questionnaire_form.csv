@@ -1,0 +1,10 @@
+part_id,part_name,part_notation,part_title
+1,individual_difference_anthro,Please answer the questions below:,
+2,individual_difference_risk,Please indicate the extent to which you agree or disagree with the following statement:,
+3,anthropomorphism,Please rate your impression of David on these scales:,
+4,trust,Please answer the questions below:,
+5,interpersonal_attraction,Please answer the questions below:,
+6,credibility_competence,Please rate your impression of David on the scale:,Competence
+7,credibility_goodwill,Please rate your impression of David on the scale:,Goodwill
+8,credibility_trustworthiness,Please rate your impression of David on the scale:,Trustworthiness
+9,empathy,How was David at…,

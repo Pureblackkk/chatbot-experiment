@@ -1,0 +1,86 @@
+qid,content,min_text,max_text,form_array,type,part_id_id
+1,"To what extent does technology - devices and machines for manufacturing, entertainment, and productive processes (e.g., cars, computers, television sets) - have intentions?",Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+2,To what extent does the average fish have free will?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+3,To what extent does the average mountain have free will?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+4,To what extent does a television set experience emotions?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+5,To what extent does the average robot have consciousness?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+6,To what extent do cows have intentions?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+7,To what extent does a car have free will?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+8,To what extent does the ocean have consciousness?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+9,To what extent does the average computer have a mind of its own?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+10,To what extent does a cheetah experience emotions?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+11,To what extent does the environment experience emotions?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+12,To what extent does the average insect have a mind of its own?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+13,To what extent does a tree have a mind of its own?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+14,To what extent does the wind have intentions?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+15,To what extent does the average reptile have consciousness?,Low degree,High degree,"1,2,3,4,5,6,7",likert,1
+16,Safety first.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,2
+17,I do not take risks with my health.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,2
+18,I prefer to avoid risks.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,2
+19,I take risks regularly.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,2
+20,I really dislike not knowing what is going to happen.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,2
+21,I usually view risks as a challenge.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,2
+22,I view my self as a risk seeker.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,2
+23,null,Fake,Natural,"1,2,3,4,5,6,7",bipolar,3
+24,null,Machinelike,Humanlike,"1,2,3,4,5,6,7",bipolar,3
+25,null,Unconscious,Conscious,"1,2,3,4,5,6,7",bipolar,3
+26,null,Artificial,Lifelike,"1,2,3,4,5,6,7",bipolar,3
+27,null,Talk in a mechanical manner,Talk in a humanlike manner,"1,2,3,4,5,6,7",bipolar,3
+28,I have no reservation about acting on David's advice.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+29,I have good reason to doubt David's competence.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+30,I can rely on David to undertake a thorough analyis of the situation before advising me.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+31,I have to be cautious about acting on the advice of David because his opinions are questionable.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+32,I can not confidently depend on David since David may complicate my affairs by careless work.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+33,I would feel a sense of personal loss if I could no longer consult David.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+34,"If I share my problems with David, I feel David would repond caringly.",Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+35,David displays a warm and caring attitude towards me.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+36,I can talk freely with David about my problems online and know that David wil want to listen.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+37,David has personal interests while giving me advice,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,4
+38,I think David could be a friend of mine.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+39,I would like to have a friendly chat with David.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+40,It would be difficult to talk with David,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+41,I could never establish a personal friendship with David.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+42,David just wouldn’t fit into my circle of friends.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+43,David woud be pleasant to be with.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+44,I feel I know David personally.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+45,David is personally offensive to me.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+46,I don’t care if I ever get to meet David,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+47,I someties wish I were more like David,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+48,I couldn’t get anything accomplished with David.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+49,David is a typical goof-off when assigned a job to do.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+50,I have confidence in David's ability to get the job done.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+51,"If I want to get things done, I could probably depend on David.",Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+52,David would be a poor problem solver.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+53,I think studying with David would be impossible. ?,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+54,you could count on the chatbot getting a job done.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+55,I have the feeling David is a very slow worker.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+56,"If we put our heads together, I think we could come up with some good ideas. ?",Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+57,David woud be fun to work with.,Totally disagree,Totally agree,"1,2,3,4,5,6,7",likert,5
+58,null,UnIntelligent,Intelligent,"1,2,3,4,5",bipolar,6
+59,null,Untrained,Trained,"1,2,3,4,5",bipolar,6
+60,null,Inexpert,Expert,"1,2,3,4,5",bipolar,6
+61,null,UnInformed,Informed,"1,2,3,4,5",bipolar,6
+62,null,Incompetent,Competent,"1,2,3,4,5",bipolar,6
+63,null,Stupid,Bright,"1,2,3,4,5",bipolar,6
+64,null,Does not care about me,Care about me,"1,2,3,4,5",bipolar,7
+65,null,Does not  have my interest at heart,Has my interests at heart,"1,2,3,4,5",bipolar,7
+66,null,Self-centered,Not self-centered,"1,2,3,4,5",bipolar,7
+67,null,Unconcerned with me,Concerned with me,"1,2,3,4,5",bipolar,7
+68,null,Insensitive,Sensitive,"1,2,3,4,5",bipolar,7
+69,null,Not understanding,Understanding,"1,2,3,4,5",bipolar,7
+70,null,Dishonest,Honest,"1,2,3,4,5",bipolar,8
+71,null,Untrustworthy,Trustworthy,"1,2,3,4,5",bipolar,8
+72,null,Dishonorable,Honorable,"1,2,3,4,5",bipolar,8
+73,null,Immoral,Moral,"1,2,3,4,5",bipolar,8
+74,null,Unethical,Ethical,"1,2,3,4,5",bipolar,8
+75,null,Phoney,Genuine,"1,2,3,4,5",bipolar,8
+76,Making you feel at ease,poor,excellent,"1,2,3,4,5",likert,9
+77,Letting you tell your "story",poor,excellent,"1,2,3,4,5",likert,9
+78,Really listening,poor,excellent,"1,2,3,4,5",likert,9
+79,Being interested in you as a whole person,poor,excellent,"1,2,3,4,5",likert,9
+80,Fully understand your concerns,poor,excellent,"1,2,3,4,5",likert,9
+81,Showing care and compassion,poor,excellent,"1,2,3,4,5",likert,9
+82,Being positive,poor,excellent,"1,2,3,4,5",likert,9
+83,Explaining things clearly,poor,excellent,"1,2,3,4,5",likert,9
+84,Helping you to take control,poor,excellent,"1,2,3,4,5",likert,9
+85,Make a plan of action with you,poor,excellent,"1,2,3,4,5",likert,9
