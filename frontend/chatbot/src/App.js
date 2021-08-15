@@ -1,6 +1,7 @@
 import {Router, Route} from "react-router-dom";
 import BeforeExpPage from './containers/beforeExpirement/index';
 import Ratepage from './containers/rate/index';
+import TempRatePage from './containers/rate-temp/index';
 import Chatpage from './containers/chat/index';
 import Intropage from './containers/introduction/index';
 import Demographypage from './containers/demograp/index';
@@ -27,8 +28,11 @@ function App() {
         <Route path="/task/:taskId" 
         render={(props) => (<Chatpage taskId={props.match.params.taskId} key={props.match.params.taskId}/>)}
         />
-        <Route path="/rate/:taskId" 
+        {/* <Route path="/rate/:taskId" 
         render={(props) => (<Ratepage taskId={props.match.params.taskId} key={props.match.params.taskId}/>)}
+        /> */}
+        <Route path="/rate_temp/:taskId" 
+        render={(props) => (<TempRatePage taskId={props.match.params.taskId} key={props.match.params.taskId}/>)}
         />
         <Route exact path='/thanks' component={Thankspage}></Route>
     </Router>

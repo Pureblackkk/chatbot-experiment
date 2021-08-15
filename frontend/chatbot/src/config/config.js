@@ -28,6 +28,9 @@ const FailReply = "Sorry I can't understand. Please follow the instruction!"
 // Input delay post time 
 const DelayPostTime = 3000;
 
+// Plain text mode
+const IsPlainTextMode = false;
+
 export { 
     UrlPath, 
     SkipMax, 
@@ -35,5 +38,6 @@ export {
     QuestionNumber, 
     InternetMode, 
     FailReply,
-    DelayPostTime
+    DelayPostTime,
+    IsPlainTextMode,
 };

@@ -11,8 +11,7 @@ class UserViewSet(ViewSet):
     def create(self, request, pk=None):
         # Register for user
         newUser = User.objects.create()
-        # uid = str(newUser.pk)
-        uid = 1
+        uid = int(newUser.pk)
         
         # TODO: Return the user's id and experiment data
         # Inital a response object with fixed components
@@ -22,13 +21,21 @@ class UserViewSet(ViewSet):
         responseData['color'] = ['teal', 'tomato', 'skyblue', 'green']
        
         # Get task based on uid 
-        taskList = Task.objects.filter(task_id=uid).values_list()[0][1:]
+        taskId = uid % 2 + 1
+
+        # Get task list 
+        taskList = Task.objects.filter(task_id=taskId).values_list()[0][1:]
 
         # Get anthropomorphism list
-        antroLevelList = Task_Anthropomorphism.objects.filter(task_id=uid).values_list()[0][1:]
+        antroLevelList = Task_Anthropomorphism.objects.filter(task_id=taskId).values_list()[0][1:]
         resAntroLevel = []
         tonelist = []
+
         for levelId in antroLevelList:
+            # For the none skip
+            if not levelId:
+                continue
+
             antroObj = {}
 
             # Old version 

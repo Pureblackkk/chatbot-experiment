@@ -13,7 +13,7 @@ class Ratepage extends React.Component {
         }
         this.taskId = parseInt(this.props.taskId) - 1;
         this.isChange = false;
-        this.rating = [1, 2, 3, 4, 5];
+        this.rating = [1, 2, 3, 4, 5, 6, 7];
     }
 
     clickHandle = () => {
@@ -25,7 +25,6 @@ class Ratepage extends React.Component {
         }else{
             message.warn('Please at least change the rate once!')
         }
-     
     }
 
     upload = () => {
@@ -86,11 +85,11 @@ class Ratepage extends React.Component {
             <div className="rate-button-wrap">
                 <div className="rate-wrap">
                     <div className="rate-content">
-                        {this.props.postQ[this.taskId]}
+                        Please rate your impression of David
                     </div>    
                     <div className="rate-rate" >
                         <div className="rate-sad">
-                            <span>Totally Unwilling</span>
+                            <span>Talk in a mechanical manner</span>
                         </div>
                         <div className="rate-select-wrap">
                             <ul className="rate-select-list">
@@ -107,7 +106,7 @@ class Ratepage extends React.Component {
                             </ul>
                         </div>
                         <div className="rate-smile">
-                            <span>Totally Willing</span>
+                            <span>Talk in a humanlike manner</span>
                         </div>
                     </div>
                 </div>

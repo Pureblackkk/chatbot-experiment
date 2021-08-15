@@ -1,0 +1,146 @@
+.rate-button-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.rate-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50vw;
+}
+
+.rate-content {
+    font-size: 22px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgba(107, 107, 107, 0.65);
+    color: rgb(252, 252, 252);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10vh;
+    box-shadow: 5px 5px 20px rgba(107, 107, 107, 0.8);
+}
+
+.rate-rate { 
+    display: flex;
+    width: 60vw;
+    height: 10vmin;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.rate-sad,
+.rate-smile{
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.rate-sad span,
+.rate-smile span {
+    display: inline-block;
+    max-width: 210px;
+    vertical-align: middle;
+}
+
+.rate-sad::after {
+    content: "\e6d9";
+    display: inline-block;
+    font-family: 'iconfont' !important;
+    font-size: 60px;
+    color: teal;
+    vertical-align: middle;
+    padding-left: 5px;
+    animation: smile .8s infinite;
+}
+
+.rate-smile::before {
+    content: '\e7ed';
+    font-family: 'iconfont' !important;
+    display: inline-block;
+    font-size: 60px;
+    color: teal;
+    vertical-align: middle;
+    padding-right: 5px;
+    animation: smile .8s infinite;
+}
+
+.rate-button {
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    margin-left: 10vw; 
+    color: white;
+    background-color:rgb(75, 137, 163);
+    cursor: pointer;
+}
+
+.rate-button::before {
+    content: '\e695';
+    color: white;
+    display: inline-block;
+    font-size: 30px;
+    font-family: 'iconfont' !important;
+    animation: highLeft .5s infinite;
+}
+
+.rate-button:hover {
+    box-shadow: 2px 2px 5px grey;
+    background-color:rgb(106, 194, 231);
+}
+
+
+.rate-select-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    width: 100%;
+}
+
+.rate-select-list li {
+    width: 5vmin;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    list-style: none;
+    font-size: 40px;
+    font-size: 6vmin;
+    font-weight: 500;
+    color: rgba(214, 214, 214, 0.9);
+    cursor: pointer;
+}
+
+.rate-select-list li:hover {
+    animation: zoomIn .5s ease-in-out;
+    color: teal;
+}
+
+@keyframes zoomIn {
+    0%{
+        font-size: 6vmin;
+        color: rgba(214, 214, 214, 0.9);
+    }
+    50%{
+        font-size: 7vmin;
+    }
+    100%{
+        font-size: 6vmin;
+        color: teal;
+    }
+}

@@ -29,16 +29,16 @@ class Expirement(models.Model):
 # Scenario order for each user
 class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
-    task1 = models.IntegerField(null=False)
-    task2 = models.IntegerField(null=False)
-    task3 = models.IntegerField(null=False)
+    task1 = models.IntegerField(null=True)
+    task2 = models.IntegerField(null=True)
+    task3 = models.IntegerField(null=True)
 
 # Anthro-level for each task
 class Task_Anthropomorphism(models.Model):
     task_id = models.AutoField(primary_key=True)
-    task1_level = models.IntegerField(null=False)
-    task2_level = models.IntegerField(null=False)
-    task3_level = models.IntegerField(null=False)
+    task1_level = models.IntegerField(null=True)
+    task2_level = models.IntegerField(null=True)
+    task3_level = models.IntegerField(null=True)
 
 # Antro type for different degree
 class Anthropomorphism(models.Model):

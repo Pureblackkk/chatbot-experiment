@@ -55,11 +55,11 @@ class ChatBox extends React.Component {
                     return (
                     <div style={{clear: 'both'}}>
                         <div key={index+1} className={item.type}>
-                            <div className={"chat-" + item.type + "-name"}>
+                            {/* <div className={"chat-" + item.type + "-name"}>
                                 {item.type === 'user' ? username : name}
-                            </div>
-                            <div className={item.type+'-pic-'+avator}>
-                            </div>
+                            </div> */}
+                            {/* <div className={item.type+'-pic-'+avator}>
+                            </div> */}
                             <div className={"chat-" + item.type + "-message"}>
                                 {this.convertAns(item.message)}
                             </div>

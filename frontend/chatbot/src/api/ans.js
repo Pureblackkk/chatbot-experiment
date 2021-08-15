@@ -32,13 +32,19 @@ const convertAns = (ansBefore, evnObj) => {
                 console.log('yearly income:', yearlyIncome);
                 console.log(yearlyIncome.match(/\d+/));
                 yearlyIncome = parseFloat(yearlyIncome.match(/\d+/)[0]);
-                for(let item of matches) {
-                    if(item[1] === evnObj.riskLevel.toLowerCase()){
-                        let res = parseFloat(item[2]) * yearlyIncome * 0.01;
-                        return Math.floor(res);
+                try {
+                    for(let item of matches) {
+                        if(item[1] === evnObj.riskLevel.toLowerCase()){
+                            let res = parseFloat(item[2]) * yearlyIncome * 0.01;
+                            return Math.floor(res);
+                        }
                     }
                 }
-                return '[error: not found]';
+                catch {
+                    return '[error: not found]';
+                }
+                
+                break;
             case 'calculation':
                 console.log('There is calculation');
                 const calArray = sparseObject(val);
