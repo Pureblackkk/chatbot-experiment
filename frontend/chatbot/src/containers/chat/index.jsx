@@ -39,7 +39,6 @@ class Chatpage extends React.Component  {
 
     // Listener function
     recieveCount = (num) => {
-        console.log('state:', num);
         const currentTaskLen = this.taskList.length;
         if(num === currentTaskLen && !this.state.isNext) {
             this.setState({isNext: true});
@@ -140,8 +139,7 @@ class Chatpage extends React.Component  {
         )
     }
 
-    componentWillUnmount() {
-        console.log('Chat page unmount')      
+    componentWillUnmount() {   
         // Clean the messgeList
         this.props.cleanMessage();
         // Set stateId to 0 again 
@@ -154,7 +152,6 @@ class Chatpage extends React.Component  {
 }
 
 const mapStateToProps = (curState) => {
-    console.log(curState);
     return {
         stateId: curState.messageReducer.state,
         intro: curState.messageReducer.intro,

@@ -1,6 +1,6 @@
 // Base url for request user information 
-// const base = 'http://119.29.62.27:82/';
-const base = 'http://127.0.0.1:8000/';
+const base = 'http://119.29.62.27:82/';
+// const base = 'http://127.0.0.1:8000/';
 
 
 // Full request path for require user information 

@@ -36,16 +36,15 @@ class ChatBox extends React.Component {
     render() {
         const {name, avator} = this.props.antroLevel;
         const username = this.props.username;
-        console.log(this.props.messageList);
         return (
             <div className="chat-box">
                 <div style={{clear: 'both'}}>
                         <div key={0} className='bot'>
-                            <div className={"chat-bot-name"}>
+                            {/* <div className={"chat-bot-name"}>
                                 {name}
                             </div>
                             <div className={'bot-pic-'+avator}>
-                            </div>
+                            </div> */}
                             <div className={"chat-bot-message"}>
                                 {this.props.ans[this.props.taskId][0]}
                             </div>

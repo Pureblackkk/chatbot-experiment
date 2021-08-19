@@ -47,7 +47,6 @@ class Ratepage extends React.Component {
             }
         })
         .then((data) => {
-            console.log(data);
         })
         .catch((e) => {
             console.log(e);
@@ -62,7 +61,6 @@ class Ratepage extends React.Component {
 
     changeHandle = (value) => {
         this.isChange || (this.isChange=true);
-        console.log(value);
     }
 
     colorstyleSet = (isEqual) => {
@@ -85,7 +83,7 @@ class Ratepage extends React.Component {
             <div className="rate-button-wrap">
                 <div className="rate-wrap">
                     <div className="rate-content">
-                        Please rate your impression of David
+                        Please rate your impression of the speaker
                     </div>    
                     <div className="rate-rate" >
                         <div className="rate-sad">
@@ -119,7 +117,6 @@ class Ratepage extends React.Component {
 }
 
 const mapStateToProps = (curState) => {
-    console.log(curState);
     return {
         instruction: curState.infoReducer.userInfo.instruction,
         uid: curState.infoReducer.userInfo.id,

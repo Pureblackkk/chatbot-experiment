@@ -72,7 +72,6 @@ class DemographyPage extends React.Component {
         })
         .then((data) => {
             data = JSON.parse(data);
-            console.log(data);
             // Check success or not 
             if(data.res === 'ok') {
                 // Go to next page
@@ -84,7 +83,6 @@ class DemographyPage extends React.Component {
         })
         .catch(() => {
             message.error('Something wrong happened. Please try again!')
-            console.log('Upload Failed');
         })
     }
 

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Actions from '../../store/actions';
 import { Checkbox, Button } from 'antd';
 import FetchInfo from '../../api/info';
+import {IsPlainTextMode} from '../../config/config';
 import './index.css';
 
 class Intropage extends React.Component{
@@ -68,9 +69,12 @@ class Intropage extends React.Component{
                 <button className="welcome-button" onClick = {this.startExp}>
                     Start
                 </button>
-                <button className="welcome-clear" onClick = {this.cleanRecord}>
+                {
+                    IsPlainTextMode && 
+                    <button className="welcome-clear" onClick = {this.cleanRecord}>
                     Clear Record
-                </button>
+                    </button>
+                }
             </div>
         )
     }

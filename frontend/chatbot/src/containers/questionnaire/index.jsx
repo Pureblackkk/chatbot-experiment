@@ -64,7 +64,6 @@ class QuestionnairePage extends React.Component {
             }
         })
         .then((data) => {
-            console.log(data.data);
             const {questionnaire, questions} = data.data;
             // Set current Question list variable 
             this.questionList = questions;
@@ -87,6 +86,7 @@ class QuestionnairePage extends React.Component {
             console.log(`Recieve questionnaire error ${error}`);
         })
 
+        // TODO: Not to recover
         // // Initial the status array 
         // // const initStatusArray = new Array(QuestionNumber).fill(0);
         // let {curStatList} = this.getCurrentList();
@@ -134,8 +134,6 @@ class QuestionnairePage extends React.Component {
             (statusArray[i] === 1) || (isNext = false);
          }
 
-         console.log(statusArray);
-         console.log(lidx);
          // Update
          this.allIsNext[currentPage] = isNext;
          this.setState({
@@ -149,7 +147,6 @@ class QuestionnairePage extends React.Component {
 
     // The main control of question click callback 
     testCallBack(qid, value, lidx, tid, selectedIdx) {
-        console.log(`lidx is ${lidx}`);
         // Save to answer list 
         this.allAnsArray[tid-1] = selectedIdx;
 
@@ -162,11 +159,9 @@ class QuestionnairePage extends React.Component {
             value: value,
             selectedIdx: selectedIdx
         }
-        console.log(this.postList)
     }
 
     progressCallBack(lidx) {
-        console.log('progress click', lidx);
         this.setState({clickByProgress: lidx});
         setTimeout(() => {
             this.setState({clickByProgress: -1});
@@ -176,7 +171,6 @@ class QuestionnairePage extends React.Component {
     pageChangeHandle(page) {
         let {isNext, currentPage, lastFocusIdx, lastFocusTIdx, maxPage, isSubmit} = this.state;
         let isNewPage = false;
-        console.log(isSubmit);
         if(isSubmit) {return;}
 
         // Check if qualified to go next 
@@ -253,7 +247,6 @@ class QuestionnairePage extends React.Component {
                     }
                 })
                 .catch((error) => {
-                    console.log(error);
                     // Alert Error 
                     message.error('Submit fail. Please try again!')
                     this.setState({
@@ -316,7 +309,6 @@ class QuestionnairePage extends React.Component {
             }
         })
         .catch((error) => {
-            console.log(error);
             // Alert Error 
             message.error('Submit fail. Please try again!')
             this.setState({

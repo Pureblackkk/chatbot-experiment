@@ -89,7 +89,6 @@ class BotAPI {
     // TODO: Not use this.task as the indentifier since it may not follow the order
     _certainStateCheck(message) {
         const status = this.task + '-' + this.state;
-        console.log('Status is : ', status);
         switch(status) {
             case '1-5':
                 this.conActions.setConIncome(message);
