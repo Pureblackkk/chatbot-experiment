@@ -75,7 +75,7 @@ class DemographyPage extends React.Component {
             // Check success or not 
             if(data.res === 'ok') {
                 // Go to next page
-                history.push('/questionnaire');
+                history.push('/questionnaire/1');
             }else{
                 // Trigger error
                 message.error('Upload failed. Please try again!')

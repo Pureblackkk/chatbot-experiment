@@ -102,7 +102,8 @@ class Chatpage extends React.Component  {
 
     nextPath = () => {
         // return `/rate/${this.taskId + 1}`
-        return `/rate_temp/${this.taskId + 1}`
+        // return `/rate_temp/${this.taskId + 1}`
+        return `/questionnaire/3`;
     }
 
     componentDidUpdate() {

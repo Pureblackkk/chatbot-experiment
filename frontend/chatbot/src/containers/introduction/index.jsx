@@ -59,7 +59,7 @@ class Intropage extends React.Component{
                     Some of these questions, will ask you to provide some personal information such as age, gender, etc.
                     We do not ask you to provide your id or real name, so that your data will be anonymous.
                     Your data will be kept and stored in our database and use for scientific purpose only.
-                    The might also be used for scientific publications.
+                    The data might also be used for scientific publications.
                     Before proceeding to the experiment, you need to give your consent. 
                     </p>
                 </div>

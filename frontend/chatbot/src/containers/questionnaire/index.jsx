@@ -33,8 +33,8 @@ class QuestionnairePage extends React.Component {
         // User info 
         this.userId = props.uid;
 
-        // TODO: Get questionnarie name 
-        this.questionnaireId = 1
+        // Get questionnarie name 
+        this.questionnaireId = this.props.questionnaireId;
     }
 
     getCurrentList(currentPage=this.state.currentPage) {
@@ -70,10 +70,10 @@ class QuestionnairePage extends React.Component {
             this.allStatusArray = new Array(questions.length).fill(0);
             this.allAnsArray = new Array(questions.length).fill(null); 
 
-            // TODO: Set current questionnaire variable
+            // Set current questionnaire variable
+            this.questionNotation = questionnaire.part_notation;
 
             // Initial the status array 
-            // const initStatusArray = new Array(QuestionNumber).fill(0);
             let {curStatList} = this.getCurrentList();
             curStatList[0] = 2;
             this.setState({
@@ -328,22 +328,25 @@ class QuestionnairePage extends React.Component {
                     <div className="questionnaire-title">
                         Questionnaire
                     </div>
+                    <div className="questionnaire-notation">
+                        {`${this.questionNotation}`}
+                    </div>
                     {curQuesList.map((item, index) => {
                         return (
                                 <Question
-                                    id={item.qid}
-                                    tid={startNumber + index + 1}
-                                    lidx={index}
-                                    type={item.type}
-                                    question={item.content}
-                                    formArray={item.form_array.split(',')}
-                                    minText={item.min_text}
-                                    maxText={item.max_text}
-                                    callBack={this.testCallBack.bind(this)}
+                                    id={item.qid} // 当前问题 id
+                                    tid={startNumber + index + 1} // 数组中总的id (目前与问题id一致)
+                                    lidx={index} // 当前页面数组中的id
+                                    type={item.type} // 问题类型
+                                    question={item.content} // 问题内容
+                                    formArray={item.form_array.split(',')} // 选项内容数组
+                                    minText={item.min_text} // 最左侧说明
+                                    maxText={item.max_text} // 最右侧说明
+                                    callBack={this.testCallBack.bind(this)} // 点击回调
                                     key={startNumber + index + 1}
-                                    isClickedByProgress={index === this.state.clickByProgress}
-                                    selectedIdx={curAnsList[index]}
-                                    isFixed={this.state.currentPage !== this.state.maxPage}
+                                    isClickedByProgress={index === this.state.clickByProgress} // 传入是否被进度条点击
+                                    selectedIdx={curAnsList[index]} // 当前选中的下标
+                                    isFixed={this.state.currentPage !== this.state.maxPage} // 是否是当前未选则的页面
                                 >
                                 </Question>
                         )

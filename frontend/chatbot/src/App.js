@@ -21,7 +21,10 @@ function App() {
     <Router history={history}>
         <Route exact path='/' component={Intropage}></Route>
         <Route path='/demography' component={Demographypage}></Route>
-        <Route path='/questionnaire' component={QuestionPage}></Route>
+        <Route path='/questionnaire/:questionnaireId'
+        render={(props) => (
+          <QuestionPage questionnaireId={props.match.params.questionnaireId} key={props.match.params.questionnaireId}/>
+        )}/>
         <Route path='/introduction/:taskId' 
         render={(props) => (<BeforeExpPage taskId={props.match.params.taskId} key={props.match.params.taskId}/>)}
         />

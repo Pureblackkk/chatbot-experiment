@@ -1,24 +1,29 @@
 .questionnaire-container {
     position: relative;
+    display: flex;
     left: 50%;
     transform: translateX(-50%);
     width: 60%;
     height: 100vh;
     background-color: rgba(230, 230, 230, 0.666);
     box-shadow: 5px 5px 15px rgba(167, 167, 167, 0.8);
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .questionnaire-title {
-    text-align: center;
+    align-self: center;
     font-size: 5vmin;
-    margin-bottom: 4vmin;
+}
+
+.questionnaire-notation {
+    font-size: 2.5vmin;
+    color: rgb(78, 79, 79);
+    margin-left: 1vmin;
 }
 
 .questionnaire-page {
-    position: absolute;
-    left: 50%;
-    top: 94%;
-    transform: translateX(-50%);
+    text-align: center;
 }
 
 .progress-container {
