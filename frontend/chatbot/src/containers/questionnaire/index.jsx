@@ -303,7 +303,11 @@ class QuestionnairePage extends React.Component {
             data = JSON.parse(data)
             if(data.res === 'yes') {
                 // Push History to next part
-                history.push('/introduction/1');
+                if (Number(this.questionnaireId) === 3) {
+                    history.push('/thanks')
+                } else {
+                    history.push('/introduction/1');
+                }
             } else {
                 return Promise.reject(data.detail)
             }

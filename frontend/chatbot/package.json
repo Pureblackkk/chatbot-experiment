@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && rm -rf ~/Desktop/chatbot_expriment_production/frontend && mv build ~/Desktop/chatbot_expriment_production/frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

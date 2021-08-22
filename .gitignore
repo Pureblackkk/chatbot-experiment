@@ -1,1 +1,8 @@
 frontend/chatbot/node_modules
+node_modules
+paper
+questionnaire
+scenario
+db_instruction.txt
+package-lock.json
+git_remote
