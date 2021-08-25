@@ -11,17 +11,29 @@ const defaultState = {
 // Reducer to record user's information
 const messageReducer =  (state=defaultState, action) => {
     if(action.type === USER_MESSAGE) { // For user send message 
+        // Report user enter time 
+        window.conversationTimerInstance.setTypeEnd();
+        const conversationDuration = window.conversationTimerInstance.getReportTime();
+        window.conversationTimerInstance.setTypeStart();
+
+        // Generate new message
+        console.log('This is duration:', conversationDuration);
         let newState = JSON.parse(JSON.stringify(state));
         newState.messageList.push({
             type: 'user',
             message: action.message,
+            duration: conversationDuration,
         })
         return newState
     }else if (action.type === BOT_MESSAGE) { // For bot send message 
+        // Mark bot enter time
+        window.conversationTimerInstance.setTypeStart();
+
+        // Generate new message
         let newState = JSON.parse(JSON.stringify(state));
         newState.messageList.push({
             type: 'bot',
-            message: action.message
+            message: action.message,
         })
         return newState
     }else if (action.type === TASK_STATE) { // For adding the status number 

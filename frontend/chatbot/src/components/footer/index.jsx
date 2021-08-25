@@ -70,7 +70,8 @@ class Footer extends React.Component {
         // Set a timer 
         this.delayPostTimer = setTimeout(() => {
             if(this.tempMsgSaveList.length) {
-                this.callBot(this.tempMsgSaveList.join('.')) // Call bot and send message in temp save list 
+                const integrateMsg = this.tempMsgSaveList.join('.');
+                this.callBot(integrateMsg) // Call bot and send message in temp save list
                 this.tempMsgSaveList = [];
             }
         }, DelayPostTime)

@@ -11,7 +11,11 @@ import history from './common/history.js';
 import {store, persistor} from './store/index';
 import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
+import { SingletonConversationTimer } from './api/timer';
 import "./app.css";
+
+// Initial global conversation instance
+window.conversationTimerInstance = SingletonConversationTimer.getInstance();
 
 // Register for router at root app
 function App() {

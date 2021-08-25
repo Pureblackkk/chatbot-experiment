@@ -37,6 +37,11 @@ class Chatpage extends React.Component  {
             this.stateId, this.taskId + 1, InternetMode); // Initial a Bot API
     }
 
+    // Start Timer 
+    componentDidMount() {
+        window.conversationTimerInstance.setTypeStart();
+    }
+
     // Listener function
     recieveCount = (num) => {
         const currentTaskLen = this.taskList.length;
@@ -57,7 +62,7 @@ class Chatpage extends React.Component  {
         const postData = {
             uid: this.props.info.id,
             dialog: this.props.messageList.reduce((pre, cur) => {
-                pre = `${pre}${cur.type}: ${cur.message}| `;
+                pre = `${pre}${cur.type}: ${cur.message}${cur.type === 'user' ? (' *duration:' + cur.duration) : ''} || `;
                 return pre;
             }, ''),
             scenario: this.taskId + 1, // TODO: Need to pay attention
