@@ -11,11 +11,9 @@ const calProcess = (calObject, evnObj) => {
         case 'times':
             return parseFloat(evnObj[val]) * parseFloat(ratio);
         default:
-            return '[error]'
+            return '[error]';
     }
 }
-
-
 
 const convertAns = (ansBefore, evnObj) => {
     return ansBefore.replace(/\[(.*?)\]/gi, function(...args) {
@@ -35,7 +33,7 @@ const convertAns = (ansBefore, evnObj) => {
                 try {
                     for(let item of matches) {
                         if(item[1] === evnObj.riskLevel.toLowerCase()){
-                            let res = parseFloat(item[2]) * yearlyIncome * 0.01;
+                            let res = parseFloat(item[2]) * yearlyIncome * 0.2 * 0.01;
                             return Math.floor(res);
                         }
                     }
@@ -46,7 +44,6 @@ const convertAns = (ansBefore, evnObj) => {
                 
                 break;
             case 'calculation':
-                console.log('There is calculation');
                 const calArray = sparseObject(val);
                 const calObject = {};
                 for(let item of calArray) {
