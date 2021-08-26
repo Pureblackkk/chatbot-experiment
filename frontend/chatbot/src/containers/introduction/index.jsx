@@ -23,10 +23,11 @@ class Intropage extends React.Component{
             return;
         } 
 
-        if (!!info.id) {
+        if (!!this.props.info) {
             history.push('/demography');
+            return;
         }
-        
+
         // Fetch scenario information
         const successCallback = (data) => {
             this.props.addUserInfo(JSON.parse(data));
