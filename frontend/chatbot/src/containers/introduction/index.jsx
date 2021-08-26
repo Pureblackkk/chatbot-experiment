@@ -21,8 +21,12 @@ class Intropage extends React.Component{
         if(!this.state.isAgree) {
             this.setState({isWarn: true});
             return;
-        }
+        } 
 
+        if (!!info.id) {
+            history.push('/demography');
+        }
+        
         // Fetch scenario information
         const successCallback = (data) => {
             this.props.addUserInfo(JSON.parse(data));
