@@ -4,7 +4,9 @@ from rest_framework.viewsets import ViewSet
 from rest_framework import status
 from .models import User, Scenario, Expirement, Task, Task_Anthropomorphism, Anthropomorphism, DialogRelated
 from .models import Questionnaire, Question, Survey, Survey_Answer
+from django.db import connection
 import json
+import csv
 
 
 class UserViewSet(ViewSet):
@@ -21,9 +23,10 @@ class UserViewSet(ViewSet):
         responseData['color'] = ['teal', 'tomato', 'skyblue', 'green']
        
         # Get task based on uid 
-        taskId = uid % 2 + 1
+        taskId = uid % 3 + 1
+        taskId = 3
 
-        # Get task list 
+        # Get task list)
         taskList = Task.objects.filter(task_id=taskId).values_list()[0][1:]
 
         # Get anthropomorphism list
@@ -47,6 +50,10 @@ class UserViewSet(ViewSet):
             antroObj['isAvator'] = True if antroDetail else False  # new is avator exist
             antroObj['wait'] = True if antroDetail[1] else False # new is type exist
             antroObj['human'] = True if antroDetail[2] else False # new is human like exist
+
+            # Component Controller (for pre-exploration)
+            antroObj['isAvator'] = True if (levelId == 3) else False
+            antroObj['isName'] = True if (levelId == 4) else False
 
             # Add tone type for later use
             tonelist.append(1 if antroDetail[2] else 0)
@@ -200,6 +207,78 @@ class DialogViewSet(ViewSet):
         except Exception as e:
             print(e)
             return Response(json.dumps({'res': 'fail', 'detail': str(e)}))
+
+# For getting the result of our final
+class ExportViewSet(ViewSet):
+    def retrieve(self, request, pk=None):
+        screteKey = 'dGhpc2lzYXNjcmV0ZWtleQ=='
+
+        if pk != screteKey:
+            return Response(json.dumps({'res': 'fail', 'detail': 'null'}))
+
+        # Getting the final experiment result in mysql
+        finalMysqlResult = self.mySelection()
+
+        # Make new response 
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="bot.csv"'
+        writer = csv.writer(response)
+        
+        # write header 
+        writer.writerow([
+            'uid', 
+            'register_time', 
+            'age', 
+            'gender',
+            'work_status',
+            'income',
+            'education',
+            'dialog',
+            'content',
+            'question_id',
+            'question_part_id',
+            'suvery_answer',
+        ])
+        writer.writerows(finalMysqlResult)
+
+        return response
+    
+    def mySelection(self):
+        with connection.cursor() as cursor:
+            executedCommands = """
+            SELECT survey_answer.uid_id AS uid,
+            user.register_time AS register_time,
+            user.age AS age,
+            user.gender AS gender,
+            user.work_status AS work_status,
+            user.income AS income,
+            user.education AS education,
+
+            dialog.dialog AS dialog,
+
+            question.content AS content,
+            question.qid as question_id,
+            question.part_id_id as question_part_id,
+
+            survey_answer.ans AS suvery_answer
+
+            FROM service_survey_answer AS survey_answer
+
+            LEFT JOIN service_user AS user
+            ON survey_answer.uid_id = user.uid
+
+            LEFT JOIN service_question AS question
+            ON survey_answer.qid_id = question.qid
+
+            LEFT JOIN service_dialogrelated AS dialog
+            ON survey_answer.uid_id = dialog.uid_id
+            """
+            cursor.execute(executedCommands)
+
+            rows = cursor.fetchall()
+        return rows
+
+
 
     
 
