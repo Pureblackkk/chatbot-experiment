@@ -123,7 +123,7 @@ class Chatpage extends React.Component  {
         return (
             <div className='page-chat'>
                 <div className='chat-container'>
-                    <Header name= {isTyping ? 'Typing' : this.botname}/>
+                    <Header name= {isTyping ? 'Typing' : this.botname} isName={this.antroLevel.isName}/>
                     <ChatBox key={this.taskId} username={this.useranme} antroLevel={this.antroLevel} taskId={this.taskId}/>
                     <Footer taskId={this.taskId} wait={this.antroLevel.wait} 
                     typingCallBack={this.typingCallBack} BotAPI={this.BotAPI}/>

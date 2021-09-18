@@ -34,17 +34,22 @@ class ChatBox extends React.Component {
     }
 
     render() {
-        const {name, avator} = this.props.antroLevel;
+        const {
+            name, 
+            avator,
+            isName, 
+            isAvator,
+        } = this.props.antroLevel;
         const username = this.props.username;
         return (
             <div className="chat-box">
                 <div style={{clear: 'both'}}>
                         <div key={0} className='bot'>
-                            {/* <div className={"chat-bot-name"}>
+                            {!!isName && <div className={"chat-bot-name"}>
                                 {name}
-                            </div>
-                            <div className={'bot-pic-'+avator}>
-                            </div> */}
+                            </div>}
+                            {!!isAvator && <div className={'bot-pic-'+avator}>
+                            </div>}
                             <div className={"chat-bot-message"}>
                                 {this.props.ans[this.props.taskId][0]}
                             </div>
@@ -54,13 +59,21 @@ class ChatBox extends React.Component {
                     return (
                     <div style={{clear: 'both'}}>
                         <div key={index+1} className={item.type}>
-                            {/* <div className={"chat-" + item.type + "-name"}>
-                                {item.type === 'user' ? username : name}
-                            </div> */}
-                            {/* <div className={item.type+'-pic-'+avator}>
-                            </div> */}
-                            <div className={"chat-" + item.type + "-message"}>
-                                {this.convertAns(item.message)}
+                            {
+                                isName &&
+                                <div className={"chat-" + item.type + "-name"}>
+                                    {item.type === 'user' ? username : name}
+                                </div>
+                            }
+                            <div className={`chat-${item.type}-wrap`}>
+                                {
+                                    isAvator &&
+                                    <div className={item.type+'-pic-'+avator}>
+                                    </div>
+                                }
+                                <div className={"chat-" + item.type + "-message"}>
+                                    {this.convertAns(item.message)}
+                                </div>
                             </div>
                         </div>
                     </div>          

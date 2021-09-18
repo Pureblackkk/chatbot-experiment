@@ -90,7 +90,27 @@
     box-sizing: content-box;
 }
 
+.chat-bot-wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .bot-pic-0 {
+    display: inline-block;
+    position: relative;
+    margin-left: 10px;
+    margin-right: -10px;
+    box-sizing: content-box;
+    background-image:url('../../common/imgs/server_avator.jpeg');
+    background-size:150% 120%;
+    background-position: 20% 10%;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+/* .bot-pic-0 {
     display: inline;
     font-family: "iconfont" !important;
     font-size: 30px;
@@ -104,7 +124,8 @@
 
 .bot-pic-0:before {
     content: "\e87d";
-}
+    vertical-align: middle;
+} */
 
 .bot-pic-1 {
     display: inline;
