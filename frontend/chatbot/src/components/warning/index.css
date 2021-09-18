@@ -1,0 +1,68 @@
+.warn-stage {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.warn-background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(211, 211, 211);
+    z-index: 0;
+    opacity: 0.8;
+}
+
+.warn-wrap {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 30%;
+    background-color: rgb(255, 255, 255);
+    border: 4px solid;
+    border-color: rgb(57, 195, 245);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 999;
+}
+
+.warn-logo::after {
+    content: '\e643';
+    display: inline-block;
+    font-family: 'iconfont' !important;
+    font-size: 5vmin;
+    color:rgb(250, 74, 43);
+}
+
+.warn-content {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    color: rgb(255, 83, 80); 
+    z-index: 999;
+    margin: 1vmin;
+}
+
+.warn-confirm-button {
+    background-color: rgb(242, 125, 71);
+    width: 15vmin;
+    height: 6vmin;
+    font-size: 1.3vw;
+    border: none;
+    border-radius: 25px;
+    border-radius: 4vmin;
+    margin-top: 1vmin;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    z-index: 999;
+}
+
+.warn-confirm-button:hover{
+    box-shadow: inset 5px 5px 5px rgb(89, 89, 89);
+}
